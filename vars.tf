@@ -1,6 +1,6 @@
 variable "enable_datastore" {
   description = "Enables the data store module that will provision data storage resources"
-  default     = false
+  default     = true
 }
 
 variable "create_rds_instance" {
@@ -10,14 +10,28 @@ variable "create_rds_instance" {
 
 variable "name" {
   description = "Name of datastore instance"
+  default     = ""
 }
 
 variable "rds_identifier" {
   description = "Identifier of datastore instance"
+  default     = ""
 }
 
 variable "rds_engine" {
   description = "The Database engine for the rds instance"
+  default     = ""
+}
+
+variable "rds_subnet_group" {
+  description = "Subnet group for RDS instances"
+  default     = ""
+}
+
+variable "rds_security_group_ids" {
+  description = "A List of security groups to bind to the rds instance"
+  type        = "list"
+  default     = []
 }
 
 variable "rds_engine_version" {
@@ -28,15 +42,6 @@ variable "rds_engine_version" {
 variable "rds_instance_class" {
   description = "The instance type to use"
   default     = "db.t3.small"
-}
-
-variable "rds_subnet_group" {
-  description = "Subnet group for RDS instances"
-}
-
-variable "rds_security_group_ids" {
-  description = "A List of security groups to bind to the rds instance"
-  type        = "list"
 }
 
 variable "rds_allocated_storage" {
@@ -91,4 +96,5 @@ variable "rds_tags" {
 
 variable "tags" {
   description = "Tags for all datastore resources"
+  default     = {}
 }
