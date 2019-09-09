@@ -20,7 +20,17 @@ variable "rds_identifier" {
 
 variable "rds_engine" {
   description = "The Database engine for the rds instance"
-  default     = ""
+  default     = "postgres"
+}
+
+variable "rds_engine_version" {
+  description = "The version of the database engine."
+  default     = 11.4
+}
+
+variable "rds_instance_class" {
+  description = "The instance type to use"
+  default     = "db.t3.small"
 }
 
 variable "rds_subnet_group" {
@@ -32,16 +42,6 @@ variable "rds_security_group_ids" {
   description = "A List of security groups to bind to the rds instance"
   type        = "list"
   default     = []
-}
-
-variable "rds_engine_version" {
-  description = "The version of the database engine."
-  default     = 11.4
-}
-
-variable "rds_instance_class" {
-  description = "The instance type to use"
-  default     = "db.t3.small"
 }
 
 variable "rds_allocated_storage" {
@@ -86,6 +86,11 @@ variable "rds_storage_encrypted" {
 
 variable "rds_storage_encryption_kms_key_arn" {
   description = "The ARN for the KMS encryption key. If creating an encrypted replica, set this to the destination KMS ARN. If storage_encrypted is set to true and kms_key_id is not specified the default KMS key created in your account will be used"
+  default     = ""
+}
+
+variable "rds_password" {
+  description = "RDS database password for the user"
   default     = ""
 }
 
