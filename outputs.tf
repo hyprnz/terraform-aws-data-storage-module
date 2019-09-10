@@ -18,7 +18,7 @@ output "rds_instance_id" {
   value       = "${aws_db_instance.this.*.id}"
 }
 
-output "rds_rds_user" {
+output "rds_db_user" {
   description = "The RDS db username"
   value       = "${aws_db_instance.this.*.username}"
 }

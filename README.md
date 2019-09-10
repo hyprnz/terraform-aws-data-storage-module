@@ -32,5 +32,5 @@ Provides an optional choice of data storage implementations in AWS. this module 
 | rds\_instance\_arn | The ARN of the RDS instance |
 | rds\_instance\_endpoint | The connection endpoint |
 | rds\_instance\_id | The RDS instance ID |
-| rds\_rds\_user | The RDS db username |
+| rds\_db\_user | The RDS db username |
 
