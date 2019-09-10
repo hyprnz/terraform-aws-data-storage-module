@@ -1,5 +1,5 @@
 ## Terraform Datastore module
-Provides an optional choice of data storage implementations in AWS. this module is designed to be used in a computer service module such as ECS or Kubernetes.## Inputs
+Provides an optional choice of data storage implementations in AWS. this module is designed to be used in a compute service module such as ECS or Kubernetes.## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
