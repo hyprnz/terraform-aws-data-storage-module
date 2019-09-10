@@ -24,3 +24,13 @@ Provides an optional choice of data storage implementations in AWS. this module 
 | rds\_storage\_encryption\_kms\_key\_arn | The ARN for the KMS encryption key. If creating an encrypted replica, set this to the destination KMS ARN. If storage_encrypted is set to true and kms_key_id is not specified the default KMS key created in your account will be used | string | `""` | no |
 | rds\_tags | Additional tags for rds datastore resources | map | `<map>` | no |
 
+## Outputs
+
+| Name | Description |
+|------|-------------|
+| rds\_instance\_address | The address of the RDS instance |
+| rds\_instance\_arn | The ARN of the RDS instance |
+| rds\_instance\_endpoint | The connection endpoint |
+| rds\_instance\_id | The RDS instance ID |
+| rds\_rds\_user | The RDS db username |
+
