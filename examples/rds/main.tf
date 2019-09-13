@@ -10,3 +10,23 @@ module "example_datastore_rds" {
 
   rds_password = "reallylongpassword"
 }
+
+output "endpoint" {
+  value = "${module.example_datastore_rds.rds_instance_endpoint[0]}"
+}
+
+output "instance_is" {
+  value = "${module.example_datastore_rds.rds_instance_id[0]}"
+}
+
+output "db_name" {
+  value = "${module.example_datastore_rds.rds_db_name[0]}"
+}
+
+output "db_user" {
+  value = "${module.example_datastore_rds.rds_db_user[0]}"
+}
+
+output "db_url" {
+  value = "${module.example_datastore_rds.rds_db_url}"
+}

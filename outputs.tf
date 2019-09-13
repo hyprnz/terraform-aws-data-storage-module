@@ -27,3 +27,8 @@ output "rds_db_user" {
   description = "The RDS db username"
   value       = "${aws_db_instance.this.*.username}"
 }
+
+output "rds_db_url" {
+  description = "The connection url in the format of `engine`://`user`:`password`@`endpoint`/`db_name`"
+  value       = "${format("%s://%s:%s@%s/%s", var.rds_engine, aws_db_instance.this.0.username, var.rds_password, aws_db_instance.this.0.endpoint, aws_db_instance.this.0.name )}"
+}
