@@ -1,5 +1,8 @@
 module "example_datastore_rds" {
   source = "../../"
+  providers {
+    aws = "aws"
+  }
 
   create_rds_instance = true
   name                = "example"
@@ -11,20 +14,25 @@ module "example_datastore_rds" {
   rds_password = "reallylongpassword"
 }
 
+provider "aws" {
+  region = "ap-southeast-2"
+}
+
+
 output "endpoint" {
-  value = "${module.example_datastore_rds.rds_instance_endpoint[0]}"
+  value = "${module.example_datastore_rds.rds_instance_endpoint}"
 }
 
 output "instance_is" {
-  value = "${module.example_datastore_rds.rds_instance_id[0]}"
+  value = "${module.example_datastore_rds.rds_instance_id}"
 }
 
 output "db_name" {
-  value = "${module.example_datastore_rds.rds_db_name[0]}"
+  value = "${module.example_datastore_rds.rds_db_name}"
 }
 
 output "db_user" {
-  value = "${module.example_datastore_rds.rds_db_user[0]}"
+  value = "${module.example_datastore_rds.rds_db_user}"
 }
 
 output "db_url" {

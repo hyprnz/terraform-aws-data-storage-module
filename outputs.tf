@@ -1,34 +1,34 @@
 output "rds_instance_address" {
   description = "The address of the RDS instance"
-  value       = "${aws_db_instance.this.*.address}"
+  value       = "${element(concat(aws_db_instance.this.*.address, list("")),0)}"
 }
 
 output "rds_instance_arn" {
   description = "The ARN of the RDS instance"
-  value       = "${aws_db_instance.this.*.arn}"
+  value       = "${element(concat(aws_db_instance.this.*.arn, list("")), 0)}"
 }
 
 output "rds_instance_endpoint" {
   description = "The connection endpoint"
-  value       = "${aws_db_instance.this.*.endpoint}"
+  value       = "${element(concat(aws_db_instance.this.*.endpoint, list("")), 0)}"
 }
 
 output "rds_instance_id" {
   description = "The RDS instance ID"
-  value       = "${aws_db_instance.this.*.id}"
+  value       = "${element(concat(aws_db_instance.this.*.id, list("")), 0)}"
 }
 
 output "rds_db_name" {
   description = "The name of the rds database"
-  value       = "${aws_db_instance.this.*.name}"
+  value       = "${element(concat(aws_db_instance.this.*.name, list("")), 0)}"
 }
 
 output "rds_db_user" {
   description = "The RDS db username"
-  value       = "${aws_db_instance.this.*.username}"
+  value       = "${element(concat(aws_db_instance.this.*.username, list("")), 0)}"
 }
 
 output "rds_db_url" {
   description = "The connection url in the format of `engine`://`user`:`password`@`endpoint`/`db_name`"
-  value       = "${format("%s://%s:%s@%s/%s", var.rds_engine, aws_db_instance.this.0.username, var.rds_password, aws_db_instance.this.0.endpoint, aws_db_instance.this.0.name )}"
+  value       = "${element(concat(aws_db_instance.this.*.username, list("")), 0) == "" ? "" : format("%s://%s:%s@%s/%s", var.rds_engine, element(concat(aws_db_instance.this.*.username, list("")),0), var.rds_password, element(concat(aws_db_instance.this.*.endpoint, list("")), 0), element(concat(aws_db_instance.this.*.name, list("")), 0) )}"
 }
