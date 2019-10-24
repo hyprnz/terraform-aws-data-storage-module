@@ -11,7 +11,7 @@ resource "aws_db_instance" "this" {
   password = "${var.rds_password}"
 
   db_subnet_group_name    = "${var.rds_subnet_group}"
-  vpc_security_group_ids  = "${var.rds_security_group_ids}"
+  vpc_security_group_ids  = ["${var.rds_security_group_ids}"]
   allocated_storage       = "${var.rds_allocated_storage}"
   backup_retention_period = "${var.backup_retention_period}"
   iops                    = "${var.rds_iops}"
