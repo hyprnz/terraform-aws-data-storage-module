@@ -1,6 +1,14 @@
 ## Terraform Datastore module
 Provides an optional choice of data storage implementations in AWS. this module is designed to be used in a compute service module such as ECS or Kubernetes.
 
+Currently supports
+
+* No Datastore
+* RDS (Postgres)
+
+
+Branch `0.11` is compatible with `Terraform 0.11`
+
 ## Inputs
 
 | Name | Description | Type | Default | Required |
