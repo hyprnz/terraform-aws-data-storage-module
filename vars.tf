@@ -99,6 +99,31 @@ variable "rds_tags" {
   default     = {}
 }
 
+variable "create_s3_bucket" {
+  description = "Controls if an S3 bucket should be provisioned"
+  default     = ""
+}
+
+variable "s3_bucket_namespace" {
+  description = "The namespace of the bucket - intention is to help avoid naming collisions"
+  default     = ""
+}
+
+variable "s3_enable_versioning" {
+  description = "If versioning should be configured on the bucket"
+  default     = true
+}
+
+variable "s3_bucket_K8s_worker_iam_role_name" {
+  description = "The name of the Kubernetes worker role that allows a service to assume the role to access teh bucket and options"
+  default = ""
+}
+
+variable "s3_tags" {
+  description = "Additional tags to be added to the s3 resources"
+  default     = {}
+}
+
 variable "tags" {
   description = "Tags for all datastore resources"
   default     = {}

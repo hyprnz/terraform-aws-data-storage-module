@@ -32,3 +32,13 @@ output "rds_db_url" {
   description = "The connection url in the format of `engine`://`user`:`password`@`endpoint`/`db_name`"
   value       = "${element(concat(aws_db_instance.this.*.username, list("")), 0) == "" ? "" : format("%s://%s:%s@%s/%s", var.rds_engine, element(concat(aws_db_instance.this.*.username, list("")),0), var.rds_password, element(concat(aws_db_instance.this.*.endpoint, list("")), 0), element(concat(aws_db_instance.this.*.name, list("")), 0) )}"
 }
+
+output "s3_bucket" {
+  description = "The name of the bucket"
+  value       = "${join(",", aws_s3_bucket.this.*.bucket)}"
+}
+
+output "s3_bucket_role_name" {
+  description = "The name of the IAm role with access policy"
+  value       = "${join(",", aws_iam_role.s3_datastore_bucket.*.name)}"
+}
