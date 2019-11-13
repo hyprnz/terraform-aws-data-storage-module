@@ -114,8 +114,8 @@ variable "s3_enable_versioning" {
   default     = true
 }
 
-variable "s3_bucket_K8s_worker_iam_role_name" {
-  description = "The name of the Kubernetes worker role that allows a service to assume the role to access teh bucket and options"
+variable "s3_bucket_K8s_worker_iam_role_arn" {
+  description = "The arn of the Kubernetes worker role that allows a service to assume the role to access teh bucket and options"
   default = ""
 }
 

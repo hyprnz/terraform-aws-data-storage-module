@@ -78,7 +78,7 @@ resource "aws_iam_role" "s3_datastore_bucket" {
     {
       "Action": "sts:AssumeRole",
       "Principal": {
-        "AWS": "arn:aws:iam:::role/${var.s3_bucket_K8s_worker_iam_role_name}"
+        "AWS": "${var.s3_bucket_K8s_worker_iam_role_arn}"
       },
       "Effect": "Allow",
       "Sid": ""
