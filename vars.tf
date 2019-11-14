@@ -101,7 +101,7 @@ variable "rds_tags" {
 
 variable "create_s3_bucket" {
   description = "Controls if an S3 bucket should be provisioned"
-  default     = ""
+  default     = false
 }
 
 variable "s3_bucket_namespace" {
