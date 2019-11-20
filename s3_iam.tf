@@ -69,7 +69,7 @@ resource "aws_iam_role_policy_attachment" "s3_datastore_bucket" {
 resource "aws_iam_role" "s3_datastore_bucket" {
   count = "${local.create_s3}"
 
-  name               = "S3BucketAccess${replace(title(var.name),"/-| /","")}Role"
+  name               = "k8s-S3BucketAccess${replace(title(var.name),"/-| /","")}Role"
   description        = "Role Assumption policy for S3 bucket access"
  assume_role_policy = <<EOF
 {
