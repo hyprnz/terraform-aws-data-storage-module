@@ -5,6 +5,7 @@ Currently supports
 
 * No Datastore
 * RDS (Postgres)
+* S3
 
 
 Branch `0.11` is compatible with `Terraform 0.11`
@@ -15,6 +16,7 @@ Branch `0.11` is compatible with `Terraform 0.11`
 |------|-------------|:----:|:-----:|:-----:|
 | backup\_retention\_period | The backup retention period in days | string | `"7"` | no |
 | create\_rds\_instance | Controls if an RDS instance should be provisioned. | string | `"false"` | no |
+| create\_s3\_bucket | Controls if an S3 bucket should be provisioned | string | `"false"` | no |
 | enable\_datastore | Enables the data store module that will provision data storage resources | string | `"true"` | no |
 | name | Name of datastore instance | string | `""` | no |
 | rds\_allocated\_storage | Amount of storage allocated to RDS instance | string | `"10"` | no |
@@ -33,6 +35,10 @@ Branch `0.11` is compatible with `Terraform 0.11`
 | rds\_storage\_encryption\_kms\_key\_arn | The ARN for the KMS encryption key. If creating an encrypted replica, set this to the destination KMS ARN. If storage_encrypted is set to true and kms_key_id is not specified the default KMS key created in your account will be used | string | `""` | no |
 | rds\_subnet\_group | Subnet group for RDS instances | string | `""` | no |
 | rds\_tags | Additional tags for rds datastore resources | map | `<map>` | no |
+| s3\_bucket\_K8s\_worker\_iam\_role\_arn | The arn of the Kubernetes worker role that allows a service to assume the role to access the bucket and options | string | `""` | no |
+| s3\_bucket\_namespace | The namespace of the bucket - intention is to help avoid naming collisions | string | `""` | no |
+| s3\_enable\_versioning | If versioning should be configured on the bucket | string | `"true"` | no |
+| s3\_tags | Additional tags to be added to the s3 resources | map | `<map>` | no |
 | tags | Tags for all datastore resources | map | `<map>` | no |
 
 ## Outputs
@@ -46,4 +52,6 @@ Branch `0.11` is compatible with `Terraform 0.11`
 | rds\_instance\_arn | The ARN of the RDS instance |
 | rds\_instance\_endpoint | The connection endpoint |
 | rds\_instance\_id | The RDS instance ID |
+| s3\_bucket | The name of the bucket |
+| s3\_bucket\_role\_name | The name of the IAm role with access policy |
 
