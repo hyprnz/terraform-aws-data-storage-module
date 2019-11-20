@@ -1,5 +1,6 @@
 module "example_datastore_rds" {
   source = "../../"
+
   providers {
     aws = "aws"
   }
@@ -17,7 +18,6 @@ module "example_datastore_rds" {
 provider "aws" {
   region = "ap-southeast-2"
 }
-
 
 output "endpoint" {
   value = "${module.example_datastore_rds.rds_instance_endpoint}"

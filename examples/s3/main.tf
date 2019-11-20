@@ -17,7 +17,6 @@ provider "aws" {
   region = "ap-southeast-2"
 }
 
-
 output "bucket_name" {
   value = "${module.example_s3_datastore.s3_bucket}"
 }
