@@ -39,6 +39,6 @@ output "s3_bucket" {
 }
 
 output "s3_bucket_role_name" {
-  description = "The name of the IAm role with access policy"
+  description = "The name of the IAM role with access policy"
   value       = "${join(",", aws_iam_role.s3_datastore_bucket.*.name)}"
 }
