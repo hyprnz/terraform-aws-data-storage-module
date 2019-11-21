@@ -105,10 +105,9 @@ variable "create_s3_bucket" {
 }
 
 variable "s3_bucket_name" {
- description = "The name of the bucket"
- default     = ""
+  description = "The name of the bucket"
+  default     = ""
 }
-
 
 variable "s3_bucket_namespace" {
   description = "The namespace of the bucket - intention is to help avoid naming collisions"
