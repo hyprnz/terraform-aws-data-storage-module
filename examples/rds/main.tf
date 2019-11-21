@@ -6,7 +6,7 @@ module "example_datastore_rds" {
   }
 
   create_rds_instance = true
-  name                = "example"
+  rds_database_name   = "example"
   rds_identifier      = "example-postgres-dev"
 
   rds_subnet_group       = "example-group"

@@ -8,8 +8,8 @@ variable "create_rds_instance" {
   default     = false
 }
 
-variable "name" {
-  description = "Name of datastore instance"
+variable "rds_database_name" {
+  description = "Name of the database"
   default     = ""
 }
 
@@ -103,6 +103,12 @@ variable "create_s3_bucket" {
   description = "Controls if an S3 bucket should be provisioned"
   default     = false
 }
+
+variable "s3_bucket_name" {
+ description = "The name of the bucket"
+ default     = ""
+}
+
 
 variable "s3_bucket_namespace" {
   description = "The namespace of the bucket - intention is to help avoid naming collisions"

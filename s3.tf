@@ -1,7 +1,7 @@
 resource "aws_s3_bucket" "this" {
   count = "${local.create_s3}"
 
-  bucket = "${format("%s.%s", var.name, var.s3_bucket_namespace)}"
+  bucket = "${format("%s.%s", var.s3_bucket_name, var.s3_bucket_namespace)}"
   acl    = "private"
 
   versioning {
