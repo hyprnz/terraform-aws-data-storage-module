@@ -45,7 +45,7 @@ module "example_datastore_rds" {
   }
 
   create_rds_instance    = true
-  name                   = "example"
+  rds_database_name      = "test_db_postgress"
   rds_identifier         = "example-postgres-dev"
   rds_subnet_group       = "${aws_db_subnet_group.db_subnetgroup.name}"
   rds_security_group_ids = ["${aws_security_group.db_security_group.id}"]

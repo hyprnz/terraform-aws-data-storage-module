@@ -1,13 +1,13 @@
 resource "aws_db_instance" "this" {
   count = "${var.enable_datastore && var.create_rds_instance ? 1 : 0}"
 
-  name           = "${var.name}"
+  name           = "${var.rds_database_name}"
   identifier     = "${var.rds_identifier}"
   engine         = "${var.rds_engine}"
   engine_version = "${var.rds_engine_version}"
   instance_class = "${var.rds_instance_class}"
 
-  username = "${format("%suser",var.name)}"
+  username = "${format("%suser",var.rds_database_name)}"
   password = "${var.rds_password}"
 
   db_subnet_group_name    = "${var.rds_subnet_group}"
