@@ -15,7 +15,7 @@ resource "aws_subnet" "db_subnet_b" {
 }
 
 resource "aws_db_subnet_group" "db_subnetgroup" {
-  subnet_ids = ["${aws_subnet.db_subnet_a.id }", "${aws_subnet.db_subnet_b.id}"]
+  subnet_ids = ["${aws_subnet.db_subnet_a.id}", "${aws_subnet.db_subnet_b.id}"]
   name       = "example-group"
 }
 
@@ -40,9 +40,7 @@ resource "aws_security_group" "db_security_group" {
 module "example_datastore_rds" {
   source = "../../"
 
-  providers {
-    aws = "aws"
-  }
+
 
   create_rds_instance    = true
   rds_database_name      = "test_db_postgress"

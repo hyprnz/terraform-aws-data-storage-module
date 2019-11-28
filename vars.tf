@@ -40,7 +40,7 @@ variable "rds_subnet_group" {
 
 variable "rds_security_group_ids" {
   description = "A List of security groups to bind to the rds instance"
-  type        = "list"
+  type        = list(string)
   default     = []
 }
 
@@ -133,3 +133,4 @@ variable "tags" {
   description = "Tags for all datastore resources"
   default     = {}
 }
+
