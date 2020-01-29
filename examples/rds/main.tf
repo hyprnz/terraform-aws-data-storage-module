@@ -51,10 +51,6 @@ module "example_datastore_rds" {
   rds_password = "reallylongpassword"
 }
 
-provider "aws" {
-  region = var.aws_region
-}
-
 variable "aws_region" {
   default = "ap-southeast-2"
 }
