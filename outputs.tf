@@ -1,6 +1,6 @@
 output "rds_instance_address" {
   description = "The address of the RDS instance"
-  value       = "${element(concat(aws_db_instance.this.*.address, list("")),0)}"
+  value       = "${element(concat(aws_db_instance.this.*.address, list("")), 0)}"
 }
 
 output "rds_instance_arn" {
@@ -30,7 +30,7 @@ output "rds_db_user" {
 
 output "rds_db_url" {
   description = "The connection url in the format of `engine`://`user`:`password`@`endpoint`/`db_name`"
-  value       = "${element(concat(aws_db_instance.this.*.username, list("")), 0) == "" ? "" : format("%s://%s:%s@%s/%s", var.rds_engine, element(concat(aws_db_instance.this.*.username, list("")),0), var.rds_password, element(concat(aws_db_instance.this.*.endpoint, list("")), 0), element(concat(aws_db_instance.this.*.name, list("")), 0) )}"
+  value       = "${element(concat(aws_db_instance.this.*.username, list("")), 0) == "" ? "" : format("%s://%s:%s@%s/%s", var.rds_engine, element(concat(aws_db_instance.this.*.username, list("")), 0), var.rds_password, element(concat(aws_db_instance.this.*.endpoint, list("")), 0), element(concat(aws_db_instance.this.*.name, list("")), 0))}"
 }
 
 output "s3_bucket" {

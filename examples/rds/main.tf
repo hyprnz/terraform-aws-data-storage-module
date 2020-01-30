@@ -1,6 +1,8 @@
 data "aws_vpcs" "default" {
   filter = {
-    name = "isDefault", values = ["true"]
+    name = "isDefault"
+
+    values = ["true"]
   }
 }
 
@@ -48,14 +50,6 @@ module "example_datastore_rds" {
   rds_security_group_ids = ["${aws_security_group.db_security_group.id}"]
 
   rds_password = "reallylongpassword"
-}
-
-provider "aws" {
-  region = "${var.aws_region}"
-}
-
-variable "aws_region" {
-  default = "ap-southeast-2"
 }
 
 output "debug_vpc_id" {

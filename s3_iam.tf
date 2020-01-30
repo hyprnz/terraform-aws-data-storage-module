@@ -2,7 +2,7 @@ data "aws_iam_policy_document" "s3_datastore_bucket" {
   count = "${local.create_s3}"
 
   statement {
-    sid = "S3DatastoreBucket${replace(title(var.s3_bucket_name),"/-| /","")}Actions"
+    sid = "S3DatastoreBucket${replace(title(var.s3_bucket_name), "/-| /", "")}Actions"
 
     actions = [
       "s3:GetBucketAcl",
@@ -23,7 +23,7 @@ data "aws_iam_policy_document" "s3_datastore_bucket" {
   }
 
   statement {
-    sid = "S3DatastoreBucketObject${replace(title(var.s3_bucket_name),"/-| /","")}Actions"
+    sid = "S3DatastoreBucketObject${replace(title(var.s3_bucket_name), "/-| /", "")}Actions"
 
     actions = [
       "s3:GetObject",
@@ -54,7 +54,7 @@ data "aws_iam_policy_document" "s3_datastore_bucket" {
 resource "aws_iam_policy" "s3_datastore_bucket" {
   count = "${local.create_s3}"
 
-  name        = "S3BucketObjectAccess${replace(title(var.s3_bucket_name),"/-| /","")}Policy"
+  name        = "S3BucketObjectAccess${replace(title(var.s3_bucket_name), "/-| /", "")}Policy"
   policy      = "${data.aws_iam_policy_document.s3_datastore_bucket.json}"
   description = "Grants permissions to access the bucket and associated objects in S3 bucket"
 }
@@ -69,7 +69,7 @@ resource "aws_iam_role_policy_attachment" "s3_datastore_bucket" {
 resource "aws_iam_role" "s3_datastore_bucket" {
   count = "${local.create_s3}"
 
-  name        = "k8s-S3BucketAccess${replace(title(var.s3_bucket_name),"/-| /","")}Role"
+  name        = "k8s-S3BucketAccess${replace(title(var.s3_bucket_name), "/-| /", "")}Role"
   description = "Role Assumption policy for S3 bucket access"
 
   assume_role_policy = <<EOF

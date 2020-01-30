@@ -44,6 +44,11 @@ variable "rds_security_group_ids" {
   default     = []
 }
 
+variable "ca_cert_identifier" {
+  description = "Specifies the identifier of the CA certificate for the DB instance"
+  default     = "rds-ca-2019"
+}
+
 variable "rds_allocated_storage" {
   description = "Amount of storage allocated to RDS instance"
   default     = 10
