@@ -7,11 +7,19 @@ module "example_datastore_rds" {
   create_rds_instance = true
   name                = "example"
   rds_identifier      = "example-postgres-dev"
+  rds_instance_class  = "db.m5.xlarge"
 
   rds_subnet_group       = "example-group"
   rds_security_group_ids = ["sg-0123456789"]
 
+  rds_monitoring_interval    = 60
+  rds_monitoring_role_arn    = "arn:aws:iam::854489628483:role/rds-monitoring-role"
+
+
+
+
   rds_password = "reallylongpassword"
+
 }
 
 provider "aws" {

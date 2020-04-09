@@ -69,6 +69,12 @@ variable "rds_monitoring_role_arn" {
   default     = ""
 }
 
+variable "enable_performance_insights" {
+  description = "Controls teh enabling of RDS Performance insights. Default to `true`"
+  default     = true
+}
+
+
 variable "rds_backup_window" {
   description = "The daily time range (in UTC) during which automated backups are created if they are enabled. Example: '09:46-10:16'. Must not overlap with maintenance_window"
   default     = "16:19-16:49"
