@@ -89,6 +89,11 @@ variable "rds_storage_encryption_kms_key_arn" {
   default     = ""
 }
 
+variable "rds_username" {
+  description = "RDS database user name"
+  type        = string
+}
+
 variable "rds_password" {
   description = "RDS database password for the user"
   default     = ""

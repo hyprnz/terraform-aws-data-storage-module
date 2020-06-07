@@ -1,3 +1,7 @@
+locals {
+  username = length(var.rds_username) > 0 ? format("%suser", var.rds_username) : format("%suser", var.rds_database_name)
+}
+
 resource "aws_db_instance" "this" {
   count = var.enable_datastore && var.create_rds_instance ? 1 : 0
 
@@ -7,7 +11,7 @@ resource "aws_db_instance" "this" {
   engine_version = var.rds_engine_version
   instance_class = var.rds_instance_class
 
-  username = format("%suser", var.rds_database_name)
+  username = local.username
   password = var.rds_password
 
   db_subnet_group_name    = var.rds_subnet_group
