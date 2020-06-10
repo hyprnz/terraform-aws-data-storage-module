@@ -49,6 +49,11 @@ variable "rds_allocated_storage" {
   default     = 10
 }
 
+variable "rds_max_allocated_storage" {
+  description = "The upper limit to which Amazon RDS can automatically scale the storage of the DB instance. Configuring this will automatically ignore differences to `allocated_storage`. Must be greater than or equal to `allocated_storage` or `0` to disable Storage Autoscaling."
+  default     = 0
+}
+
 variable "backup_retention_period" {
   description = "The backup retention period in days"
   default     = 7
@@ -67,6 +72,11 @@ variable "rds_monitoring_interval" {
 variable "rds_monitoring_role_arn" {
   description = "The ARN for the IAM role that permits RDS to send enhanced monitoring metrics to CloudWatch Logs. Must be specified if monitoring_interval is non-zero."
   default     = ""
+}
+
+variable "rds_enable_performance_insights" {
+  description = "Controls the enabling of RDS Performance insights. Default to `true`"
+  default     = true
 }
 
 variable "rds_backup_window" {
@@ -92,6 +102,7 @@ variable "rds_storage_encryption_kms_key_arn" {
 variable "rds_username" {
   description = "RDS database user name"
   type        = string
+  default     = ""
 }
 
 variable "rds_password" {
