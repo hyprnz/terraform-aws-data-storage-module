@@ -8,6 +8,11 @@ variable "create_rds_instance" {
   default     = false
 }
 
+variable "use_rds_snapshot" {
+  description = "Controls if an RDS snapshot should be used."
+  default     = false
+}
+
 variable "rds_database_name" {
   description = "Name of the database"
   default     = ""

@@ -49,6 +49,7 @@ Branch `0.11` is compatible with `Terraform 0.11`
 | s3\_enable\_versioning | If versioning should be configured on the bucket | `bool` | `true` | no |
 | s3\_tags | Additional tags to be added to the s3 resources | `map` | `{}` | no |
 | tags | Tags for all datastore resources | `map` | `{}` | no |
+| use_rds_snapshot | Controls if an RDS snapshot should be used. | `bool` | `false` | no |
 
 ## Outputs
 
