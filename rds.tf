@@ -52,6 +52,9 @@ resource "aws_db_instance" "snapshot" {
   engine_version = var.rds_engine_version
   instance_class = var.rds_instance_class
 
+  username = local.username
+  password = var.rds_password
+
   snapshot_identifier = data.aws_db_snapshot.latest_snapshot[0].id
   option_group_name   = var.rds_option_group_name
 
