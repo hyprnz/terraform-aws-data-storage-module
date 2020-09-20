@@ -46,9 +46,14 @@ data "aws_db_snapshot" "latest_snapshot" {
 resource "aws_db_instance" "snapshot" {
   count = var.enable_datastore && var.use_rds_snapshot && (! var.create_rds_instance) ? 1 : 0
 
-  instance_class      = var.rds_instance_class
-  name                = var.rds_database_name
+  name           = var.rds_database_name
+  identifier     = var.rds_identifier
+  engine         = var.rds_engine
+  engine_version = var.rds_engine_version
+  instance_class = var.rds_instance_class
+
   snapshot_identifier = data.aws_db_snapshot.latest_snapshot[0].id
+  option_group_name   = var.rds_option_group_name
 
   db_subnet_group_name         = var.rds_subnet_group
   vpc_security_group_ids       = var.rds_security_group_ids

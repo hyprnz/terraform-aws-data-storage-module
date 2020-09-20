@@ -64,6 +64,12 @@ variable "backup_retention_period" {
   default     = 7
 }
 
+variable "rds_option_group_name" {
+  description = "Name of the DB option group to associate"
+  type        = string
+  default     = null
+}
+
 variable "rds_iops" {
   description = "The amount of provisioned IOPS. Setting this implies a storage_type of 'io1'"
   default     = 0
