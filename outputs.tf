@@ -45,8 +45,8 @@ output "s3_bucket" {
   value       = join(",", aws_s3_bucket.this.*.bucket)
 }
 
-output "s3_bucket_role_name" {
-  description = "The name of the IAM role with access policy"
-  value       = join(",", aws_iam_role.s3_datastore_bucket.*.name)
+output "s3_bucket_policy_arn" {
+  description = "Policy arn to be attached to a execution role defined in the parent module"
+  value       = join(",", aws_iam_policy.s3_datastore_bucket[*].arn)
 }
 
