@@ -19,6 +19,7 @@ Branch `0.11` is compatible with `Terraform 0.11`
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:-----:|
+| rds\_option\_group\_name | Name of the DB option group to associate | `string` | n/a | yes |
 | backup\_retention\_period | The backup retention period in days | `number` | `7` | no |
 | create\_rds\_instance | Controls if an RDS instance should be provisioned. | `bool` | `false` | no |
 | create\_s3\_bucket | Controls if an S3 bucket should be provisioned | `bool` | `false` | no |
@@ -43,13 +44,12 @@ Branch `0.11` is compatible with `Terraform 0.11`
 | rds\_subnet\_group | Subnet group for RDS instances | `string` | `""` | no |
 | rds\_tags | Additional tags for rds datastore resources | `map` | `{}` | no |
 | rds\_username | RDS database user name | `string` | `""` | no |
-| s3\_bucket\_K8s\_worker\_iam\_role\_arn | The arn of the Kubernetes worker role that allows a service to assume the role to access the bucket and options | `string` | `""` | no |
 | s3\_bucket\_name | The name of the bucket | `string` | `""` | no |
 | s3\_bucket\_namespace | The namespace of the bucket - intention is to help avoid naming collisions | `string` | `""` | no |
 | s3\_enable\_versioning | If versioning should be configured on the bucket | `bool` | `true` | no |
 | s3\_tags | Additional tags to be added to the s3 resources | `map` | `{}` | no |
 | tags | Tags for all datastore resources | `map` | `{}` | no |
-| use_rds_snapshot | Controls if an RDS snapshot should be used. | `bool` | `false` | no |
+| use\_rds\_snapshot | Controls if an RDS snapshot should be used. | `bool` | `false` | no |
 
 ## Outputs
 
@@ -63,5 +63,5 @@ Branch `0.11` is compatible with `Terraform 0.11`
 | rds\_instance\_endpoint | The connection endpoint |
 | rds\_instance\_id | The RDS instance ID |
 | s3\_bucket | The name of the bucket |
-| s3\_bucket\_role\_name | The name of the IAM role with access policy |
+| s3\_bucket\_policy\_arn | Policy arn to be attached to a execution role defined in the parent module |
 
