@@ -151,6 +151,143 @@ variable "s3_tags" {
   default     = {}
 }
 
+variable "dynamodb_tags" {
+  description = "Additional tags (e.g map(`BusinessUnit`,`XYX`)"
+  type        = map
+  default     = {}
+}
+
+variable "create_dynamo_db_table" {
+  description = "Whether or not to enable DynamoDB resources"
+  default     = false
+}
+
+variable "dynamodb_table_name" {
+  description = "DynamoDB table name. Must be supplied if creating a dynamodb table"
+  type        = string
+  default     = ""
+}
+
+variable "dynamodb_billing_mode" {
+  description = "DynamoDB Billing mode. Can be PROVISIONED or PAY_PER_REQUEST"
+  type        = string
+  default     = "PROVISIONED"
+}
+
+variable "dynamodb_enable_streams" {
+  description = "Enable DynamoDB streams"
+  type        = bool
+  default     = false
+}
+
+variable "dynamodb_stream_view_type" {
+  description = "When an item in a table is modified, what information is written to the stream"
+  type        = string
+  # Valid values are `KEYS_ONLY`, `NEW_IMAGE`, `OLD_IMAGE` or `NEW_AND_OLD_IMAGES`
+  default = ""
+}
+
+variable "dynamodb_enable_encryption" {
+  description = "Enable DynamoDB server-side encryption"
+  type        = bool
+  default     = true
+}
+
+variable "dynamodb_enable_point_in_time_recovery" {
+  description = "Enable DynamoDB point in time recovery"
+  type        = bool
+  default     = true
+}
+
+variable "dynamodb_autoscale_read_target" {
+  description = "The target value (in %) for DynamoDB read autoscaling"
+  default     = 50
+}
+
+variable "dynamodb_autoscale_write_target" {
+  description = "The target value (in %) for DynamoDB write autoscaling"
+  default     = 50
+}
+
+variable "dynamodb_autoscale_min_read_capacity" {
+  description = "DynamoDB autoscaling min read capacity"
+  default     = 5
+}
+
+variable "dynamodb_autoscale_min_write_capacity" {
+  description = "DynamoDB autoscaling min write capacity"
+  default     = 5
+}
+
+variable "dynamodb_autoscale_max_read_capacity" {
+  description = "DynamoDB autoscaling max read capacity"
+  default     = 20
+}
+
+variable "dynamodb_autoscale_max_write_capacity" {
+  description = "DynamoDB autoscaling max write capacity"
+  default     = 20
+}
+
+variable "dynamodb_hash_key" {
+  description = "DynamoDB table Hash Key"
+  type        = string
+  default     = ""
+}
+
+variable "dynamodb_hash_key_type" {
+  description = "Hash Key type, which must be a scalar type: `S`, `N`, or `B` for (S)tring, (N)umber or (B)inary data"
+  type        = string
+  default     = "S"
+}
+
+variable "dynamodb_range_key" {
+  description = "DynamoDB table Range Key"
+  type        = string
+  default     = ""
+}
+
+variable "dynamodb_range_key_type" {
+  description = "Range Key type, which must be a scalar type: `S`, `N` or `B` for (S)tring, (N)umber or (B)inary data"
+  type        = string
+  default     = "S"
+}
+
+variable "dynamodb_ttl_enabled" {
+  description = "Whether ttl is enabled or disabled"
+  default     = true
+}
+
+variable "dynamodb_ttl_attribute" {
+  description = "DynamoDB table ttl attribute"
+  type        = string
+  default     = "Expires"
+}
+
+variable "dynamodb_attributes" {
+  description = "Additional DynamoDB attributes in the form of a list of mapped values"
+  type        = list
+  default     = []
+}
+
+variable "dynamodb_global_secondary_index_map" {
+  description = "Additional global secondary indexes in the form of a list of mapped values"
+  type        = any
+  default     = []
+}
+
+variable "dynamodb_local_secondary_index_map" {
+  description = "Additional local secondary indexes in the form of a list of mapped values"
+  type        = list
+  default     = []
+}
+
+variable "dynamodb_enable_autoscaler" {
+  description = "Whether or not to enable DynamoDB autoscaling"
+  type        = bool
+  default     = false
+}
+
 variable "tags" {
   description = "Tags for all datastore resources"
   default     = {}
