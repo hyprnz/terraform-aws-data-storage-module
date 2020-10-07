@@ -32,3 +32,8 @@ output "table_stream_label" {
   description = "DynamoDB table stream label"
   value       = module.example_dynamodb_base.dynamodb_table_stream_label
 }
+
+output "table_policy_arn" {
+  description = "DynamoDB table policy arn"
+  value       = module.example_dynamodb_complete.dynamodb_table_policy_arn
+}
