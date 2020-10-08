@@ -6,8 +6,8 @@ module "example_dynamodb_base" {
     aws = aws
   }
 
-  enable_datastore       = true
-  create_dynamo_db_table = true
+  enable_datastore      = true
+  create_dynamodb_table = true
 
   dynamodb_table_name                   = "App-Env-Example"
   dynamodb_hash_key                     = "HashKey"

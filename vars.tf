@@ -157,7 +157,7 @@ variable "dynamodb_tags" {
   default     = {}
 }
 
-variable "create_dynamo_db_table" {
+variable "create_dynamodb_table" {
   description = "Whether or not to enable DynamoDB resources"
   default     = false
 }

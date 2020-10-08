@@ -8,10 +8,10 @@ resource "aws_appautoscaling_target" "read_target" {
 }
 
 resource "aws_appautoscaling_target" "read_target_index" {
-  count        = var.enabled ? length(var.dynamodb_indexes) : 0
-  max_capacity = var.autoscale_max_read_capacity
-  min_capacity = var.autoscale_min_read_capacity
-  resource_id  = "table/${var.dynamodb_table_name}/index/${element(var.dynamodb_indexes, count.index)}"
+  count              = var.enabled ? length(var.dynamodb_indexes) : 0
+  max_capacity       = var.autoscale_max_read_capacity
+  min_capacity       = var.autoscale_min_read_capacity
+  resource_id        = "table/${var.dynamodb_table_name}/index/${element(var.dynamodb_indexes, count.index)}"
   scalable_dimension = "dynamodb:index:ReadCapacityUnits"
   service_namespace  = "dynamodb"
 }

@@ -105,7 +105,7 @@ resource "aws_dynamodb_table" "this" {
     ignore_changes = [read_capacity, write_capacity]
   }
 
-  tags = merge(map("Name", var.dynamodb_table_name), var.dynamodb_tags, var.tags )
+  tags = merge(map("Name", var.dynamodb_table_name), var.dynamodb_tags, var.tags)
 }
 
 module "dynamodb_autoscaler" {

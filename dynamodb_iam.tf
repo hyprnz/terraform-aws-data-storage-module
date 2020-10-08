@@ -2,7 +2,7 @@ data "aws_iam_policy_document" "dynamodb_table_datastore" {
   count = local.create_dynamodb ? 1 : 0
 
   statement {
-    sid = "DynamodbDataStore${replace(title(var.dynamodb_table_name), "/-| /", "")}Actions"
+    sid = "DynamodbDataStore${replace(title(var.dynamodb_table_name), "/-| |_/", "")}Actions"
 
     effect = "Allow"
 
@@ -21,8 +21,8 @@ data "aws_iam_policy_document" "dynamodb_table_datastore" {
     ]
   }
 
-    statement {
-    sid = "DynamodbDataStore${replace(title(var.dynamodb_table_name), "/-| /", "")}StreamActions"
+  statement {
+    sid = "DynamodbDataStore${replace(title(var.dynamodb_table_name), "/-| |_/", "")}StreamActions"
 
     effect = "Allow"
 
@@ -41,7 +41,7 @@ data "aws_iam_policy_document" "dynamodb_table_datastore" {
 resource "aws_iam_policy" "dynamodb_table_datastore" {
   count = local.create_dynamodb ? 1 : 0
 
-  name        = "DynamodbDataStoreTableAccess${replace(title(var.dynamodb_table_name), "/-| /", "")}Policy"
+  name        = "DynamodbDataStoreTableAccess${replace(title(var.dynamodb_table_name), "/-| |_/", "")}Policy"
   policy      = data.aws_iam_policy_document.dynamodb_table_datastore[0].json
   description = "Grants permissions to access the dynamodb table and associated objects"
 }

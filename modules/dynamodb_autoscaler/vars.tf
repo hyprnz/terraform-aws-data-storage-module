@@ -1,7 +1,7 @@
 variable "enabled" {
   description = "Whether or not to create the modules resources"
-  type        =  bool
-  default     =  true
+  type        = bool
+  default     = true
 }
 
 variable "tags" {

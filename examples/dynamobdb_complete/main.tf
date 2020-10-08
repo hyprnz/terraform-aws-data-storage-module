@@ -5,8 +5,8 @@ module "example_dynamodb_complete" {
     aws = aws
   }
 
-  enable_datastore       = true
-  create_dynamo_db_table = true
+  enable_datastore      = true
+  create_dynamodb_table = true
 
   dynamodb_table_name                   = "App-Env-Example-Complete"
   dynamodb_hash_key                     = "HashKey"
@@ -20,19 +20,19 @@ module "example_dynamodb_complete" {
   dynamodb_enable_autoscaler            = true
 
   dynamodb_attributes = [
-      {
-        name = "DailyAverage"
-        type = "N"
-      },
-      {
-        name = "HighWater"
-        type = "N"
-      },
-      {
-        name = "Timestamp"
-        type = "S"
-      },
-    ]
+    {
+      name = "DailyAverage"
+      type = "N"
+    },
+    {
+      name = "HighWater"
+      type = "N"
+    },
+    {
+      name = "Timestamp"
+      type = "S"
+    },
+  ]
 
   dynamodb_local_secondary_index_map = [
     {
