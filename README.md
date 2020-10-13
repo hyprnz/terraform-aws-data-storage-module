@@ -13,7 +13,7 @@ Branch `0.11` is compatible with `Terraform 0.11`
 
 | Name | Version |
 |------|---------|
-| aws | ~> 2.19 |
+| aws | ~> 3.0 |
 | null | ~> 2.1 |
 
 ## Inputs
