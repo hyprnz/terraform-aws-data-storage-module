@@ -17,7 +17,8 @@ data "aws_iam_policy_document" "dynamodb_table_datastore" {
     ]
 
     resources = [
-      join("", aws_dynamodb_table.this[*].arn)
+      join("", aws_dynamodb_table.this[*].arn),
+      "${join("", aws_dynamodb_table.this[*].arn)}/*"
     ]
   }
 
