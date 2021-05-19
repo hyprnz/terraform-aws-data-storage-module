@@ -7,6 +7,7 @@ data "aws_iam_policy_document" "dynamodb_table_datastore" {
     effect = "Allow"
 
     actions = [
+      "dynamodb:DescribeTable",
       "dynamodb:BatchGetItem",
       "dynamodb:GetItem",
       "dynamodb:Query",
