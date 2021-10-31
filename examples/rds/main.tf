@@ -48,7 +48,7 @@ module "example_datastore_rds" {
   rds_subnet_group       = aws_db_subnet_group.db_subnetgroup.name
   rds_security_group_ids = [aws_security_group.db_security_group.id]
 
-  rds_password = "reallylongpassword"
+  rds_password = "reallylongpassword%&^!"
 }
 
 provider "aws" {
@@ -83,7 +83,7 @@ output "endpoint" {
   value = module.example_datastore_rds.rds_instance_endpoint
 }
 
-output "instance_is" {
+output "instance_id" {
   value = module.example_datastore_rds.rds_instance_id
 }
 
@@ -97,4 +97,12 @@ output "db_user" {
 
 output "db_url" {
   value = module.example_datastore_rds.rds_db_url
+}
+
+output "db_url_encoded" {
+  value = module.example_datastore_rds.rds_db_url_encoded
+}
+
+output "db_engine_version" {
+  value = module.example_datastore_rds.rds_engine_version
 }
