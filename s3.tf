@@ -1,5 +1,5 @@
 resource "aws_s3_bucket" "this" {
-  count = local.create_s3
+  count = local.count_s3
 
   bucket = format("%s.%s", var.s3_bucket_name, var.s3_bucket_namespace)
   acl    = "private"

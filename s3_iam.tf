@@ -1,5 +1,5 @@
 data "aws_iam_policy_document" "s3_datastore_bucket" {
-  count = local.create_s3
+  count = local.count_s3
 
   statement {
     sid = "S3DatastoreBucket${replace(title(var.s3_bucket_name), "/-| |_/", "")}Actions"
@@ -52,7 +52,7 @@ data "aws_iam_policy_document" "s3_datastore_bucket" {
 }
 
 resource "aws_iam_policy" "s3_datastore_bucket" {
-  count = local.create_s3
+  count = local.count_s3
 
   name        = "S3DatstoreBucketObjectAccess${replace(title(var.s3_bucket_name), "/-| |_/", "")}Policy"
   policy      = data.aws_iam_policy_document.s3_datastore_bucket[0].json

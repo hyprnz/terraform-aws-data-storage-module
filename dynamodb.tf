@@ -28,7 +28,7 @@ locals {
 }
 
 resource "null_resource" "global_secondary_index_names" {
-  count = (local.create_dynamodb ? 1 : 0) * length(var.dynamodb_global_secondary_index_map)
+  count = local.count_dynamodb * length(var.dynamodb_global_secondary_index_map)
   # Convert the multi-item `global_secondary_index_map` into a simple `map`
   # with just one item `name` since `triggers` does not support `lists` in
   # `maps` (which are used in `non_key_attributes`)
@@ -37,7 +37,7 @@ resource "null_resource" "global_secondary_index_names" {
 }
 
 resource "null_resource" "local_secondary_index_names" {
-  count = (local.create_dynamodb ? 1 : 0) * length(var.dynamodb_local_secondary_index_map)
+  count = local.count_dynamodb * length(var.dynamodb_local_secondary_index_map)
   # Convert the multi-item `local_secondary_index_map` into a simple `map`
   # with just one item `name` since `triggers` does not support `lists` in
   # `maps` (which are used in `non_key_attributes`)
@@ -46,7 +46,7 @@ resource "null_resource" "local_secondary_index_names" {
 }
 
 resource "aws_dynamodb_table" "this" {
-  count            = local.create_dynamodb ? 1 : 0
+  count            = local.count_dynamodb
   name             = var.dynamodb_table_name
   billing_mode     = var.dynamodb_billing_mode
   read_capacity    = var.dynamodb_autoscale_min_read_capacity
