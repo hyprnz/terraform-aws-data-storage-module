@@ -4,12 +4,12 @@ variable "enable_datastore" {
 }
 
 variable "create_rds_instance" {
-  description = "Controls if an RDS instance should be provisioned."
+  description = "Controls if an RDS instance should be provisioned. Will take precedence if this and `use_rds_snapshot` are both true."
   default     = false
 }
 
 variable "use_rds_snapshot" {
-  description = "Controls if an RDS snapshot should be used."
+  description = "Controls if an RDS snapshot should be used when creating the rds instance. Will use the latest snapshot of the `rds_identifier` variable."
   default     = false
 }
 

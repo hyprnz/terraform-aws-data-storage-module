@@ -52,10 +52,18 @@ module "example_datastore_rds" {
 }
 
 provider "aws" {
-  region = var.aws_region
+  region = var.region
+
+  default_tags {
+    tags = {
+      "Environment"    = "stage",
+      "Resource Owner" = "terraform-aws-data-storage-module example rds"
+      "Managed By"     = "Terraform"
+    }
+  }
 }
 
-variable "aws_region" {
+variable "region" {
   default = "ap-southeast-2"
 }
 

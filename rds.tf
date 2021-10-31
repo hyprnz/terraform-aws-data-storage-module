@@ -3,7 +3,7 @@ locals {
 }
 
 resource "aws_db_instance" "this" {
-  count = var.enable_datastore && var.create_rds_instance && (! var.use_rds_snapshot) ? 1 : 0
+  count = local.count_rds_instance
 
   name           = var.rds_database_name
   identifier     = var.rds_identifier
@@ -37,14 +37,14 @@ resource "aws_db_instance" "this" {
 }
 
 data "aws_db_snapshot" "latest_snapshot" {
-  count = var.use_rds_snapshot ? 1 : 0
+  count = local.count_rds_instance_with_snapshot
 
   db_instance_identifier = var.rds_identifier
   most_recent            = true
 }
 
 resource "aws_db_instance" "snapshot" {
-  count = var.enable_datastore && var.use_rds_snapshot && (! var.create_rds_instance) ? 1 : 0
+  count = local.count_rds_instance_with_snapshot
 
   name           = var.rds_database_name
   identifier     = var.rds_identifier

@@ -4,5 +4,11 @@ locals {
 
   create_dynamodb = var.enable_datastore && var.create_dynamodb_table
   count_dynamodb  = local.create_dynamodb ? 1 : 0
+
+  create_rds_instance = var.enable_datastore && var.create_rds_instance
+  count_rds_instance  = local.create_rds_instance ? 1 : 0
+
+  create_rds_instance_with_snapshot = var.enable_datastore && var.use_rds_snapshot && (! local.create_rds_instance)
+  count_rds_instance_with_snapshot  = local.create_rds_instance_with_snapshot ? 1 : 0
 }
 
