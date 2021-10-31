@@ -40,6 +40,23 @@ output "rds_db_url" {
   )
 }
 
+output "rds_db_url_encoded" {
+  description = "The connection url in the format of `engine`://`user`:`password`@`endpoint`/`db_name`"
+  value = element(concat(aws_db_instance.this.*.username, aws_db_instance.snapshot.*.username, [""]), 0) == "" ? "" : format(
+    "%s://%s:%s@%s/%s",
+    var.rds_engine,
+    element(concat(aws_db_instance.this.*.username, aws_db_instance.snapshot.*.username, [""]), 0),
+    urlencode(var.rds_password),
+    element(concat(aws_db_instance.this.*.endpoint, aws_db_instance.snapshot.*.endpoint, [""]), 0),
+    element(concat(aws_db_instance.this.*.name, aws_db_instance.snapshot.*.name, [""]), 0),
+  )
+}
+
+output "rds_engine_version" {
+  description = "The actual engine version used by the RDS instance."
+  value = element(concat(aws_db_instance.this[*].engine_version_actual, aws_db_instance.snapshot[*].engine_version_actual, [""]),0)
+}
+
 output "s3_bucket" {
   description = "The name of the bucket"
   value       = join(",", aws_s3_bucket.this.*.bucket)

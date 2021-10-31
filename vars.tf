@@ -23,6 +23,16 @@ variable "rds_identifier" {
   default     = ""
 }
 
+variable "rds_apply_immediately" {
+  description = "Specifies whether any database modifications are applied immediately, or during the next maintenance window. Defaults to `false`."
+  default     = false
+}
+
+variable "rds_auto_minor_version_upgrade" {
+  description = "Indicates that minor engine upgrades will be applied automatically to the DB instance during the maintenance window. Defaults to `true`."
+  default     = true
+}
+
 variable "rds_engine" {
   description = "The Database engine for the rds instance"
   default     = "postgres"
@@ -30,7 +40,7 @@ variable "rds_engine" {
 
 variable "rds_engine_version" {
   description = "The version of the database engine."
-  default     = 11.4
+  default     = 11
 }
 
 variable "rds_instance_class" {
@@ -73,6 +83,11 @@ variable "rds_option_group_name" {
 variable "rds_iops" {
   description = "The amount of provisioned IOPS. Setting this implies a storage_type of 'io1'"
   default     = 0
+}
+
+variable "rds_multi_az" {
+  description = "Specifies if the RDS instance is multi-AZ."
+  default     = false
 }
 
 variable "rds_monitoring_interval" {

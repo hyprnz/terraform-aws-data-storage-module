@@ -14,12 +14,16 @@ resource "aws_db_instance" "this" {
   username = local.username
   password = var.rds_password
 
+  option_group_name            = var.rds_option_group_name
+  apply_immediately            = var.rds_apply_immediately
+  auto_minor_version_upgrade   = var.rds_auto_minor_version_upgrade
   db_subnet_group_name         = var.rds_subnet_group
   vpc_security_group_ids       = var.rds_security_group_ids
   allocated_storage            = var.rds_allocated_storage
   max_allocated_storage        = var.rds_max_allocated_storage
   backup_retention_period      = var.backup_retention_period
   iops                         = var.rds_iops
+  multi_az                     = var.rds_multi_az
   monitoring_interval          = var.rds_monitoring_interval
   monitoring_role_arn          = var.rds_monitoring_role_arn
   performance_insights_enabled = var.rds_enable_performance_insights
@@ -57,14 +61,17 @@ resource "aws_db_instance" "snapshot" {
   password = var.rds_password
 
   snapshot_identifier = data.aws_db_snapshot.latest_snapshot[0].id
-  option_group_name   = var.rds_option_group_name
 
+  option_group_name            = var.rds_option_group_name
+  apply_immediately            = var.rds_apply_immediately
+  auto_minor_version_upgrade   = var.rds_auto_minor_version_upgrade
   db_subnet_group_name         = var.rds_subnet_group
   vpc_security_group_ids       = var.rds_security_group_ids
   allocated_storage            = var.rds_allocated_storage
   max_allocated_storage        = var.rds_max_allocated_storage
   backup_retention_period      = var.backup_retention_period
   iops                         = var.rds_iops
+  multi_az                     = var.rds_multi_az
   monitoring_interval          = var.rds_monitoring_interval
   monitoring_role_arn          = var.rds_monitoring_role_arn
   performance_insights_enabled = var.rds_enable_performance_insights
