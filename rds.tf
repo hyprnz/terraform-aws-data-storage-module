@@ -29,6 +29,7 @@ resource "aws_db_instance" "this" {
   kms_key_id                   = var.rds_storage_encryption_kms_key_arn
   tags = merge(
     {
+      "Name"       = var.rds_identifier,
       "rds_engine" = var.rds_engine
     },
     var.tags,
@@ -73,6 +74,7 @@ resource "aws_db_instance" "snapshot" {
   kms_key_id                   = var.rds_storage_encryption_kms_key_arn
   tags = merge(
     {
+      "Name"       = var.rds_identifier,
       "rds_engine" = var.rds_engine
     },
     var.tags,
