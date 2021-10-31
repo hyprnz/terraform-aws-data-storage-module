@@ -6,12 +6,24 @@ module "example_no_datastore" {
   }
 
   enable_datastore    = false
-  create_rds_instance = false
 }
 
 provider "aws" {
-  region = "ap-southeast-2"
+  region = var.region
+
+  default_tags {
+    tags = {
+      "Environment"    = "stage",
+      "Resource Owner" = "terraform-aws-data-storage-module example s3"
+      "Managed By"     = "Terraform"
+    }
+  }
 }
+
+variable "region" {
+  default = "ap-southeast-2"
+}
+
 
 output "endpoint" {
   value = module.example_no_datastore.rds_instance_endpoint
