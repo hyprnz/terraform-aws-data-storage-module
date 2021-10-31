@@ -23,6 +23,14 @@ module "example_dynamodb_base" {
 
 provider "aws" {
   region = var.region
+
+  default_tags {
+    tags = {
+      "Environment"    = "stage",
+      "Resource Owner" = "terraform-aws-data-storage-module example dynamodb_base"
+      "Managed By"     = "Terraform"
+    }
+  }
 }
 
 variable "region" {

@@ -8,11 +8,23 @@ module "example_s3_datastore" {
   enable_datastore    = true
   create_s3_bucket    = true
   s3_bucket_name      = "s3-datastore"
-  s3_bucket_namespace = "stage.example.com"
+  s3_bucket_namespace = "stage-example-com"
 }
 
 provider "aws" {
-  region = "ap-southeast-2"
+  region = var.region
+
+  default_tags {
+    tags = {
+      "Environment"    = "stage",
+      "Resource Owner" = "terraform-aws-data-storage-module example s3"
+      "Managed By"     = "Terraform"
+    }
+  }
+}
+
+variable "region" {
+  default = "ap-southeast-2"
 }
 
 output "bucket_name" {
