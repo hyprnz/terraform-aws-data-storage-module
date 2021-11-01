@@ -5,7 +5,7 @@ module "example_no_datastore" {
     aws = aws
   }
 
-  enable_datastore    = false
+  enable_datastore = false
 }
 
 provider "aws" {

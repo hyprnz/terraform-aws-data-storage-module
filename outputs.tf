@@ -54,7 +54,7 @@ output "rds_db_url_encoded" {
 
 output "rds_engine_version" {
   description = "The actual engine version used by the RDS instance."
-  value = element(concat(aws_db_instance.this[*].engine_version_actual, aws_db_instance.snapshot[*].engine_version_actual, [""]),0)
+  value       = element(concat(aws_db_instance.this[*].engine_version_actual, aws_db_instance.snapshot[*].engine_version_actual, [""]), 0)
 }
 
 output "s3_bucket" {

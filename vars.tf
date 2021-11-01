@@ -117,7 +117,7 @@ variable "rds_skip_final_snapshot" {
 
 variable "rds_final_snapshot_identifier" {
   description = "The name of your final DB snapshot when this DB instance is deleted. Must be provided if `rds_skip_final_snapshot` is set to false. The value must begin with a letter, only contain alphanumeric characters and hyphens, and not end with a hyphen or contain two consecutive hyphens."
-  default = ""
+  default     = ""
 }
 
 variable "rds_storage_encrypted" {
@@ -143,7 +143,7 @@ variable "rds_password" {
 
 variable "rds_enable_deletion_protection" {
   description = " If the DB instance should have deletion protection enabled. The database can't be deleted when this value is set to `true`. The default is `false`."
-  default = false
+  default     = false
 }
 
 variable "rds_tags" {
