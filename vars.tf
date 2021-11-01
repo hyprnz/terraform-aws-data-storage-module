@@ -159,7 +159,7 @@ variable "rds_skip_final_snapshot" {
 variable "rds_final_snapshot_identifier" {
   type        = string
   description = "The name of your final DB snapshot when this DB instance is deleted. Must be provided if `rds_skip_final_snapshot` is set to false. The value must begin with a letter, only contain alphanumeric characters and hyphens, and not end with a hyphen or contain two consecutive hyphens."
-  default     = ""
+  default     = null
 }
 
 variable "rds_storage_encrypted" {
@@ -363,9 +363,4 @@ variable "tags" {
   type        = map
   description = "Tags for all datastore resources"
   default     = {}
-}
-
-variable "name" {
-  type        = string
-  description = "(optional) describe your variable"
 }
