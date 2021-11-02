@@ -30,7 +30,7 @@ resource "aws_db_instance" "this" {
   backup_window                = var.rds_backup_window
   skip_final_snapshot          = var.rds_skip_final_snapshot
   final_snapshot_identifier    = var.rds_final_snapshot_identifier
-  storage_encrypted            = var.rds_storage_encrypted
+  storage_encrypted            = var.rds_enable_storage_encryption
   kms_key_id                   = var.rds_storage_encryption_kms_key_arn
   deletion_protection          = var.rds_enable_deletion_protection
   tags = merge(
@@ -80,7 +80,7 @@ resource "aws_db_instance" "snapshot" {
   backup_window                = var.rds_backup_window
   skip_final_snapshot          = var.rds_skip_final_snapshot
   final_snapshot_identifier    = var.rds_final_snapshot_identifier
-  storage_encrypted            = var.rds_storage_encrypted
+  storage_encrypted            = var.rds_enable_storage_encryption
   kms_key_id                   = var.rds_storage_encryption_kms_key_arn
   deletion_protection          = var.rds_enable_deletion_protection
   tags = merge(

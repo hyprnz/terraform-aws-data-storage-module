@@ -162,7 +162,7 @@ variable "rds_final_snapshot_identifier" {
   default     = null
 }
 
-variable "rds_storage_encrypted" {
+variable "rds_enable_storage_encryption" {
   type        = bool
   description = "Specifies whether the DB instance is encrypted"
   default     = false
