@@ -1,14 +1,32 @@
-## Terraform Datastore module
-Provides an optional choice of data storage implementations in AWS. this module is designed to be used in a compute service module such as ECS or Kubernetes.
+# Terraform Datastore Module
+The `terraform-datastorage-module` provides several datastorage options in a common abstraction. This is a shared moduled in that this module is designed to be composed with other modules.
 
-Currently supports
+This module supports Terraform `0.13.0` (with backwards compatibility for Terraform `0.12.31`)
 
-* No Datastore
-* RDS (Postgres/MSSQL)
-* S3
-* Dynamodb
+The module currently supports the following implementations:
 
-Branch `0.11` is compatible with `Terraform 0.11` but is no longer supported
+* [No Datastore](#no-datastore)
+* [RDS (Postgres/MSSQL)](#rds)
+* [S3](#s3-bucket)
+* [Dynamodb](#dynamodb-table)
+
+## No Datastore
+Provides the option to disable the module if required.
+
+## RDS
+RDS datastores support both Postgres and MySQL engines and provide many configuration options (see below). The RDS implementation currently only supports username/password access. The module supports creating a new RDS instance `create_rds_instance` or creating an instance from an existing snapshot `use_rds_snapshot`.
+
+## S3 Bucket
+Creates an S3 bucket and an access policy of which the ARN is returned as an output variable. This allows the root/service module to compose other policies and expose these as an execution role.
+
+At this stage, the module does not support adding a custom resource policy, nor does it configure any explicit deny rules for the bucket.
+
+## Dynamodb Table
+Creates a dynamodb table and an access policy of which the ARN is returned as an output variable.  There are many configuration options (see below).
+
+## Notes
+Branch 0.11 is compatible with Terraform 0.11 but is no longer supported or maintained. The branch will be deleted in the near future.
+
 ---
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
