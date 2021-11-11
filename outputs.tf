@@ -57,9 +57,9 @@ output "rds_engine_version" {
   value       = element(concat(aws_db_instance.this[*].engine_version_actual, aws_db_instance.snapshot[*].engine_version_actual, [""]), 0)
 }
 
-output "s3_bucket" {
+output "s3_bucket_name" {
   description = "The name of the bucket"
-  value       = join(",", aws_s3_bucket.this.*.bucket)
+  value       = join(",", aws_s3_bucket.this[*].bucket)
 }
 
 output "s3_bucket_policy_arn" {

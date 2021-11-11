@@ -43,7 +43,7 @@ data "aws_iam_policy_document" "dynamodb_table_datastore" {
 resource "aws_iam_policy" "dynamodb_table_datastore" {
   count = local.count_dynamodb
 
-  name        = "DataStorage-Dynamodb-${replace(var.dynamodb_table_name, "/-| |_/", "")}-Policy"
+  name        = "DataStorage-Dynamodb-${replace(var.dynamodb_table_name, "/\\.| /", "")}-Policy"
   policy      = data.aws_iam_policy_document.dynamodb_table_datastore[0].json
   description = "Grants permissions to access the dynamodb table and associated objects"
 }

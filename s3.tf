@@ -1,7 +1,7 @@
 resource "aws_s3_bucket" "this" {
   count = local.count_s3
 
-  bucket = format("%s.%s", var.s3_bucket_name, var.s3_bucket_namespace)
+  bucket = var.s3_bucket_name
   acl    = "private"
 
   versioning {

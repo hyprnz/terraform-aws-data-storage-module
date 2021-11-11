@@ -38,7 +38,7 @@ variable "rds_tags" {
 
 variable "rds_database_name" {
   type        = string
-  description = "Name of the database"
+  description = "The name of the database. Can only contain alphanumeric characters"
   default     = ""
 }
 
@@ -93,12 +93,18 @@ variable "rds_security_group_ids" {
 variable "rds_allocated_storage" {
   type        = number
   description = "Amount of storage allocated to RDS instance"
-  default     = 10
+  default     = 100
 }
 
 variable "rds_max_allocated_storage" {
   type        = number
   description = "The upper limit to which Amazon RDS can automatically scale the storage of the DB instance. Configuring this will automatically ignore differences to `allocated_storage`. Must be greater than or equal to `allocated_storage` or `0` to disable Storage Autoscaling."
+  default     = 200
+}
+
+variable "rds_iops" {
+  type        = number
+  description = "The amount of provisioned IOPS. Setting this implies a storage_type of 'io1'"
   default     = 0
 }
 
@@ -112,12 +118,6 @@ variable "rds_option_group_name" {
   type        = string
   description = "Name of the DB option group to associate"
   default     = null
-}
-
-variable "rds_iops" {
-  type        = number
-  description = "The amount of provisioned IOPS. Setting this implies a storage_type of 'io1'"
-  default     = 0
 }
 
 variable "rds_multi_az" {
@@ -202,13 +202,7 @@ variable "s3_tags" {
 
 variable "s3_bucket_name" {
   type        = string
-  description = "The name of the bucket"
-  default     = ""
-}
-
-variable "s3_bucket_namespace" {
-  type        = string
-  description = "The namespace of the bucket - intention is to help avoid naming collisions"
+  description = "The name of the bucket. It is recommended to add a namespace/suffix to the name to avoid naming collisions"
   default     = ""
 }
 

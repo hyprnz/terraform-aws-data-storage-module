@@ -2,7 +2,7 @@ data "aws_iam_policy_document" "s3_datastore_bucket" {
   count = local.count_s3
 
   statement {
-    sid = "S3DatastoreBucket${replace(title(var.s3_bucket_name), "/-| |_/", "")}Actions"
+    sid = "S3DatastoreBucketActions"
 
     actions = [
       "s3:GetBucketAcl",
@@ -23,7 +23,7 @@ data "aws_iam_policy_document" "s3_datastore_bucket" {
   }
 
   statement {
-    sid = "S3DatastoreBucketObject${replace(title(var.s3_bucket_name), "/-| |_/", "")}Actions"
+    sid = "S3DatastoreBucketObjectActions"
 
     actions = [
       "s3:GetObject",
@@ -54,7 +54,7 @@ data "aws_iam_policy_document" "s3_datastore_bucket" {
 resource "aws_iam_policy" "s3_datastore_bucket" {
   count = local.count_s3
 
-  name        = "S3DatstoreBucketObjectAccess${replace(title(var.s3_bucket_name), "/-| |_/", "")}Policy"
+  name        = "S3DatstoreBucketObjectAccess-${replace(var.s3_bucket_name, "/\\.| /", "")}-Policy"
   policy      = data.aws_iam_policy_document.s3_datastore_bucket[0].json
   description = "Grants permissions to access the datastore bucket and associated objects"
 }
