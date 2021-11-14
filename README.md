@@ -1,5 +1,5 @@
 # Terraform Datastore Module
-The `terraform-datastorage-module` provides several datastorage options in a common abstraction. This is a shared moduled in that this module is designed to be composed with other modules.
+The `terraform-datastorage-module` provides several datastorage options in a common abstraction. This is a shared module in that this module is designed to be sourced by other modules.
 
 This module supports Terraform `0.13.0` (with backwards compatibility for Terraform `0.12.31`)
 
