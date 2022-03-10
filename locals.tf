@@ -10,5 +10,8 @@ locals {
 
   create_rds_instance_with_snapshot = var.enable_datastore && var.use_rds_snapshot && (! local.create_rds_instance)
   count_rds_instance_with_snapshot  = local.create_rds_instance_with_snapshot ? 1 : 0
+
+  create_rds_instance_with_parameter_group = var.create_rds_instance && var.rds_parameter_group_name != null && var.rds_parameter_group_family != null
+  count_rds_parameter_group                = local.create_rds_instance_with_parameter_group ? 1 : 0
 }
 
