@@ -212,8 +212,8 @@ variable "rds_enable_deletion_protection" {
 
 variable "rds_cloudwatch_logs_exports" {
   type        = set(string)
-  description = "Which RDS logs should be sent to CloudWatch. The default is `postgresql` and `upgrade`."
-  default     = ["postgresql", "upgrade"]
+  description = "Which RDS logs should be sent to CloudWatch. The default is empty (no logs sent to CloudWatch)"
+  default     = []
 }
 
 variable "rds_iam_authentication_enabled" {

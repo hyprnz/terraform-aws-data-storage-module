@@ -103,7 +103,7 @@ Creates a dynamodb table and an access policy of which the ARN is returned as an
 | rds_apply_immediately | Specifies whether any database modifications are applied immediately, or during the next maintenance window. Defaults to `false`. | `bool` | `false` | no |
 | rds_auto_minor_version_upgrade | Indicates that minor engine upgrades will be applied automatically to the DB instance during the maintenance window. Defaults to `true`. | `bool` | `true` | no |
 | rds_backup_window | The daily time range (in UTC) during which automated backups are created if they are enabled. Example: '09:46-10:16'. Must not overlap with maintenance_window | `string` | `"16:19-16:49"` | no |
-| rds_cloudwatch_logs_exports | Which RDS logs should be sent to CloudWatch. The default is `postgresql` and `upgrade`. | `set(string)` | <pre>[<br>  "postgresql",<br>  "upgrade"<br>]</pre> | no |
+| rds_cloudwatch_logs_exports | Which RDS logs should be sent to CloudWatch. The default is empty (no logs sent to CloudWatch) | `set(string)` | `[]` | no |
 | rds_database_name | The name of the database. Can only contain alphanumeric characters | `string` | `""` | no |
 | rds_enable_deletion_protection | If the DB instance should have deletion protection enabled. The database can't be deleted when this value is set to `true`. The default is `false`. | `bool` | `false` | no |
 | rds_enable_performance_insights | Controls the enabling of RDS Performance insights. Default to `true` | `bool` | `true` | no |
