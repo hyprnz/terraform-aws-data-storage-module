@@ -21,14 +21,14 @@ The `terraform-datastorage-module` provides several datastorage options in a com
 
 See the [Releases](https://github.com/hyprnz/terraform-aws-data-storage-module/releases) page for the complete list.
 
-* [__3.0.1__](https://github.com/hyprnz/terraform-aws-data-storage-module/releases/tag/3.0.1) - Adds support for more RDS parameters including IAM authentication, RDS Parameter Groups, and CloudWatch log exports.
-* [__3.0.0__](https://github.com/hyprnz/terraform-aws-data-storage-module/releases/tag/3.0.0) - Updates the module to support Terraform 0.13 (with backwards compatibility to 0.12.31). Adds support for more RDS parameters. 
+* [__3.1.0__](https://github.com/hyprnz/terraform-aws-data-storage-module/releases/tag/3.0.1) - Adds support for more RDS parameters including IAM authentication, RDS Parameter Groups, and CloudWatch log exports.
+* [__3.0.0__](https://github.com/hyprnz/terraform-aws-data-storage-module/releases/tag/3.0.0) - Updates the module to support Terraform 0.13 (with backwards compatibility to 0.12.31). Adds support for more RDS parameters.
 * [__2.0.2__](https://github.com/hyprnz/terraform-aws-data-storage-module/releases/tag/2.0.2) - DynamoDB Policy Updates.
 * [__2.0.1__](https://github.com/hyprnz/terraform-aws-data-storage-module/releases/tag/2.0.1) - Dynamodb Policy Name Update.
 * [__2.0.0__](https://github.com/hyprnz/terraform-aws-data-storage-module/releases/tag/2.0.0) - Updated AWS Provider to Version 3.
 
 ### Notes
-Branch 0.11 is compatible with Terraform 0.11 but is no longer supported or maintained. The branch will be deleted in the near future.
+Branch 0.11 is compatible with Terraform 0.11 but is no longer supported or maintained. We will delete the branch shortly.
 
 ## Tooling requirements
 This module supports Terraform `0.13.0` (with backwards compatibility for Terraform `0.12.31`)
@@ -39,7 +39,9 @@ This module supports Terraform `0.13.0` (with backwards compatibility for Terraf
 Provides the option to disable the module if required.
 
 ## RDS
-RDS datastores support both Postgres and MySQL engines and provide many configuration options (see below). The RDS implementation supports both username/password access and IAM based authentication. The module supports creating a new RDS instance `create_rds_instance` or creating an instance from an existing snapshot `use_rds_snapshot`.
+RDS datastores supports Postgres and MySQL engines and provide many configuration options (see below). The module supports creating a new RDS instance `create_rds_instance` or an instance from an existing snapshot `use_rds_snapshot`.
+
+Although the module supports enabling IAM access to the RDS instance, the module intends that workloads will access the RDS instance via a username and password combination. The IAM access approach requires configuration within the RDS instance to map between the AWS and RDS engine abstractions, which the module does not support. The ability to enable IAM access support allows organisations to define user roles to access RDS instances rather than sharing or generating usernames and passwords.
 
 ## S3 Bucket
 Creates an S3 bucket and an access policy of which the ARN is returned as an output variable. This allows the root/service module to compose other policies and expose these as an execution role.
@@ -47,9 +49,8 @@ Creates an S3 bucket and an access policy of which the ARN is returned as an out
 At this stage, the module does not support adding a custom resource policy, nor does it configure any explicit deny rules for the bucket.
 
 ## Dynamodb Table
-Creates a dynamodb table and an access policy of which the ARN is returned as an output variable.  There are many configuration options (see below).
+Creates a dynamodb table and an access policy of which the ARN is returned as an output variable. There are many configuration options (see below).
 
-# Terraform Docs
 ---
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
@@ -149,8 +150,8 @@ Creates a dynamodb table and an access policy of which the ARN is returned as an
 | dynamodb_table_stream_arn | DynamoDB table stream ARN |
 | dynamodb_table_stream_label | DynamoDB table stream label |
 | rds_db_name | The name of the rds database |
-| rds_db_url | The connection url in the format of `engine`://`user`:`password`@`endpoint`/`db_name` |
-| rds_db_url_encoded | The connection url in the format of `engine`://`user`:`ulrencode(password)`@`endpoint`/`db_name` |
+| rds_db_url | The connection url in the format of `engine://user:password@endpoint/db_name` |
+| rds_db_url_encoded | The connection url in the format of `engine://user`:`ulrencode(password)@endpoint/db_name` |
 | rds_db_user | The RDS db username |
 | rds_engine_version | The actual engine version used by the RDS instance. |
 | rds_instance_address | The address of the RDS instance |
