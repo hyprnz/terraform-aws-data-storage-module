@@ -50,12 +50,12 @@ module "example_datastore_rds" {
 
   rds_password = "reallylongpassword%&^!"
 
-  rds_parameter_group_name = "example-dev-parameter-group"
+  rds_parameter_group_name   = "example-dev-parameter-group"
   rds_parameter_group_family = "postgres11"
   rds_parameter_group_parameters = {
-    "log_connections": "1",
-    "log_disconnections": "1",
-    "shared_preload_libraries": "pg_stat_statements,pgaudit"
+    "log_connections" : "1",
+    "log_disconnections" : "1",
+    "shared_preload_libraries" : "pg_stat_statements,pgaudit"
   }
 }
 
