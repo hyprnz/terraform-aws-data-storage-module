@@ -33,6 +33,15 @@ Branch 0.11 is compatible with Terraform 0.11 but is no longer supported or main
 ## Tooling requirements
 This module supports Terraform `0.13.0` (with backwards compatibility for Terraform `0.12.31`)
 
+If you experience issues with this module as a result of aws provider v4.0.0 and above we recommend creating an override to cap the provider version. For example:
+
+```
+aws = {
+  source : "hashicorp/aws",
+  version : ">= 3.38.0, < 4.0.0"
+}
+```
+
 # Supported Implementations
 
 ## No Datastore
