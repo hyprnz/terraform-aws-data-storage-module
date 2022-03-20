@@ -128,7 +128,13 @@ variable "rds_parameter_group_family" {
 
 variable "rds_parameter_group_parameters" {
   type        = map
-  description = "Key value pairs of parameters that will be added to this database's parameter group. Requires `rds_parameter_group_name` and `rds_parameter_group_family` to be set as well. Default is empty and the AWS default parameter group is used."
+  description = <<EOF
+  Map of parameters that will be added to this database's parameter group. 
+  Parameters set here will override any AWS default parameters with the same name.
+  Requires `rds_parameter_group_name` and `rds_parameter_group_family` to be set as well. 
+  Parameters should be provided as a key value pair within this map. eg `"param_name" : "param_value"`. 
+  Default is empty and the AWS default parameter group is used. 
+  EOF
   default     = {}
 }
 

@@ -123,7 +123,7 @@ Creates a dynamodb table and an access policy of which the ARN is returned as an
 | rds_option_group_name | Name of the DB option group to associate | `string` | `null` | no |
 | rds_parameter_group_family | Name of the DB family (engine & version) for the parameter group. eg. postgres11 | `string` | `null` | no |
 | rds_parameter_group_name | Name of the DB parameter group to create and associate with the instance | `string` | `null` | no |
-| rds_parameter_group_parameters | Key value pairs of parameters that will be added to this database's parameter group. Requires `rds_parameter_group_name` and `rds_parameter_group_family` to be set as well. Default is empty and the AWS default parameter group is used. | `map` | `{}` | no |
+| rds_parameter_group_parameters | Map of parameters that will be added to this database's parameter group. <br>  Parameters set here will override any AWS default parameters with the same name.<br>  Requires `rds_parameter_group_name` and `rds_parameter_group_family` to be set as well. <br>  Parameters should be provided as a key value pair within this map. eg `"param_name" : "param_value"`. <br>  Default is empty and the AWS default parameter group is used. | `map` | `{}` | no |
 | rds_password | RDS database password for the user | `string` | `""` | no |
 | rds_security_group_ids | A List of security groups to bind to the rds instance | `list(string)` | `[]` | no |
 | rds_skip_final_snapshot | Determines whether a final DB snapshot is created before the DB instance is deleted. If true is specified, no DBSnapshot is created. If false is specified, a DB snapshot is created before the DB instance is deleted, using the value from final_snapshot_identifier | `bool` | `true` | no |
@@ -150,8 +150,8 @@ Creates a dynamodb table and an access policy of which the ARN is returned as an
 | dynamodb_table_stream_arn | DynamoDB table stream ARN |
 | dynamodb_table_stream_label | DynamoDB table stream label |
 | rds_db_name | The name of the rds database |
-| rds_db_url | The connection url in the format of `engine://user:password@endpoint/db_name` |
-| rds_db_url_encoded | The connection url in the format of `engine://user`:`ulrencode(password)@endpoint/db_name` |
+| rds_db_url | The connection url in the format of `engine`://`user`:`password`@`endpoint`/`db_name` |
+| rds_db_url_encoded | The connection url in the format of `engine`://`user`:`ulrencode(password)`@`endpoint`/`db_name` |
 | rds_db_user | The RDS db username |
 | rds_engine_version | The actual engine version used by the RDS instance. |
 | rds_instance_address | The address of the RDS instance |
