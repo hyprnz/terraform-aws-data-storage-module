@@ -67,7 +67,7 @@ Creates a dynamodb table and an access policy of which the ARN is returned as an
 | Name | Version |
 |------|---------|
 | terraform | >= 0.12.31 |
-| aws | >= 3.38.0, < 4.0.0 |
+| aws | >= 3.38.0 |
 | null | >=2.1 |
 
 ## Providers
