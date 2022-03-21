@@ -114,6 +114,30 @@ variable "backup_retention_period" {
   default     = 7
 }
 
+variable "rds_parameter_group_name" {
+  type        = string
+  description = "Name of the DB parameter group to create and associate with the instance"
+  default     = null
+}
+
+variable "rds_parameter_group_family" {
+  type        = string
+  description = "Name of the DB family (engine & version) for the parameter group. eg. postgres11"
+  default     = null
+}
+
+variable "rds_parameter_group_parameters" {
+  type        = map
+  description = <<EOF
+  Map of parameters that will be added to this database's parameter group. 
+  Parameters set here will override any AWS default parameters with the same name.
+  Requires `rds_parameter_group_name` and `rds_parameter_group_family` to be set as well. 
+  Parameters should be provided as a key value pair within this map. eg `"param_name" : "param_value"`. 
+  Default is empty and the AWS default parameter group is used. 
+  EOF
+  default     = {}
+}
+
 variable "rds_option_group_name" {
   type        = string
   description = "Name of the DB option group to associate"
@@ -189,6 +213,18 @@ variable "rds_password" {
 variable "rds_enable_deletion_protection" {
   type        = bool
   description = " If the DB instance should have deletion protection enabled. The database can't be deleted when this value is set to `true`. The default is `false`."
+  default     = false
+}
+
+variable "rds_cloudwatch_logs_exports" {
+  type        = set(string)
+  description = "Which RDS logs should be sent to CloudWatch. The default is empty (no logs sent to CloudWatch)"
+  default     = []
+}
+
+variable "rds_iam_authentication_enabled" {
+  type        = bool
+  description = "Controls whether you can use IAM users to log in to the RDS database. The default is `false`"
   default     = false
 }
 
