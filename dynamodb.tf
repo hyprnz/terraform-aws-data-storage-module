@@ -33,7 +33,7 @@ resource "null_resource" "global_secondary_index_names" {
   # with just one item `name` since `triggers` does not support `lists` in
   # `maps` (which are used in `non_key_attributes`)
   # https://www.terraform.io/docs/providers/aws/r/dynamodb_table.html#non_key_attributes-1
-  triggers = map("name", lookup(var.dynamodb_global_secondary_index_map[count.index], "name"))
+  triggers = tomap({name = lookup(var.dynamodb_global_secondary_index_map[count.index], "name")})
 }
 
 resource "null_resource" "local_secondary_index_names" {
@@ -42,7 +42,7 @@ resource "null_resource" "local_secondary_index_names" {
   # with just one item `name` since `triggers` does not support `lists` in
   # `maps` (which are used in `non_key_attributes`)
   # https://www.terraform.io/docs/providers/aws/r/dynamodb_table.html#non_key_attributes-1
-  triggers = map("name", lookup(var.dynamodb_local_secondary_index_map[count.index], "name"))
+  triggers = tomap({name = lookup(var.dynamodb_local_secondary_index_map[count.index], "name")})
 }
 
 resource "aws_dynamodb_table" "this" {
@@ -105,7 +105,7 @@ resource "aws_dynamodb_table" "this" {
     ignore_changes = [read_capacity, write_capacity]
   }
 
-  tags = merge(map("Name", var.dynamodb_table_name), var.dynamodb_tags, var.tags)
+  tags = merge(tomap({name = var.dynamodb_table_name}), var.dynamodb_tags, var.tags)
 }
 
 module "dynamodb_autoscaler" {
