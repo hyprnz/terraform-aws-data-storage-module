@@ -63,7 +63,7 @@ data "aws_db_snapshot" "latest_snapshot" {
 resource "aws_db_instance" "snapshot" {
   count = local.count_rds_instance_with_snapshot
 
-  name           = var.rds_database_name
+  db_name           = var.rds_database_name
   identifier     = var.rds_identifier
   engine         = var.rds_engine
   engine_version = var.rds_engine_version
