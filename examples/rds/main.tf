@@ -5,12 +5,15 @@ data "aws_vpcs" "default" {
   }
 }
 
-data "aws_subnet_ids" "default" {
-  vpc_id = tolist(data.aws_vpcs.default.ids)[0]
+data "aws_subnets" "default" {
+  filter {
+    name   = "vpc-id"
+    values = data.aws_vpcs.default.ids
+  }
 }
 
 resource "aws_db_subnet_group" "db_subnetgroup" {
-  subnet_ids = data.aws_subnet_ids.default.ids
+  subnet_ids = data.aws_subnets.default.ids
   name       = "data-storage-rds-example"
 }
 
@@ -80,7 +83,7 @@ output "debug_vpc_id" {
 }
 
 output "debug_subnet_ids" {
-  value = data.aws_subnet_ids.default.ids
+  value = data.aws_subnets.default.ids
 }
 
 output "debug_subgroup_name" {

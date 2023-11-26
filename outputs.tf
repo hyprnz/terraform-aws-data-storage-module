@@ -20,7 +20,7 @@ output "rds_instance_id" {
 
 output "rds_db_name" {
   description = "The name of the rds database"
-  value       = element(concat(aws_db_instance.this.*.name, aws_db_instance.snapshot.*.name, [""]), 0)
+  value       = element(concat(aws_db_instance.this.*.db_name, aws_db_instance.snapshot.*.name, [""]), 0)
 }
 
 output "rds_db_user" {
@@ -36,7 +36,7 @@ output "rds_db_url" {
     element(concat(aws_db_instance.this.*.username, aws_db_instance.snapshot.*.username, [""]), 0),
     var.rds_password,
     element(concat(aws_db_instance.this.*.endpoint, aws_db_instance.snapshot.*.endpoint, [""]), 0),
-    element(concat(aws_db_instance.this.*.name, aws_db_instance.snapshot.*.name, [""]), 0),
+    element(concat(aws_db_instance.this.*.db_name, aws_db_instance.snapshot.*.name, [""]), 0),
   )
 }
 
@@ -48,7 +48,7 @@ output "rds_db_url_encoded" {
     element(concat(aws_db_instance.this.*.username, aws_db_instance.snapshot.*.username, [""]), 0),
     urlencode(var.rds_password),
     element(concat(aws_db_instance.this.*.endpoint, aws_db_instance.snapshot.*.endpoint, [""]), 0),
-    element(concat(aws_db_instance.this.*.name, aws_db_instance.snapshot.*.name, [""]), 0),
+    element(concat(aws_db_instance.this.*.db_name, aws_db_instance.snapshot.*.name, [""]), 0),
   )
 }
 
