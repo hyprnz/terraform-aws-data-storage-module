@@ -6,7 +6,7 @@ variable "enabled" {
 
 variable "tags" {
   description = "Additional tags (e.g map(`BusinessUnit`,`XYX`)"
-  type        = map
+  type        = map(any)
   default     = {}
 }
 
@@ -22,7 +22,7 @@ variable "dynamodb_table_arn" {
 
 variable "dynamodb_indexes" {
   description = "List of DynamoDB indexes"
-  type        = list
+  type        = list(any)
   default     = []
 }
 

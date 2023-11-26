@@ -31,7 +31,7 @@ variable "create_dynamodb_table" {
 // RDS variables ================================
 
 variable "rds_tags" {
-  type        = map
+  type        = map(any)
   description = "Additional tags for rds datastore resources"
   default     = {}
 }
@@ -127,7 +127,7 @@ variable "rds_parameter_group_family" {
 }
 
 variable "rds_parameter_group_parameters" {
-  type        = map
+  type        = map(any)
   description = <<EOF
   Map of parameters that will be added to this database's parameter group. 
   Parameters set here will override any AWS default parameters with the same name.
@@ -231,7 +231,7 @@ variable "rds_iam_authentication_enabled" {
 // s3 variables =================================
 
 variable "s3_tags" {
-  type        = map
+  type        = map(any)
   description = "Additional tags to be added to the s3 resources"
   default     = {}
 }
@@ -251,7 +251,7 @@ variable "s3_enable_versioning" {
 // Dynamodb variables ===========================
 
 variable "dynamodb_tags" {
-  type        = map
+  type        = map(any)
   description = "Additional tags (e.g map(`BusinessUnit`,`XYX`)"
   default     = {}
 }
@@ -366,7 +366,7 @@ variable "dynamodb_ttl_attribute" {
 }
 
 variable "dynamodb_attributes" {
-  type        = list
+  type        = list(any)
   description = "Additional DynamoDB attributes in the form of a list of mapped values"
   default     = []
 }
@@ -378,7 +378,7 @@ variable "dynamodb_global_secondary_index_map" {
 }
 
 variable "dynamodb_local_secondary_index_map" {
-  type        = list
+  type        = list(any)
   description = "Additional local secondary indexes in the form of a list of mapped values"
   default     = []
 }
@@ -390,7 +390,7 @@ variable "dynamodb_enable_autoscaler" {
 }
 
 variable "tags" {
-  type        = map
+  type        = map(any)
   description = "Tags for all datastore resources"
   default     = {}
 }
