@@ -31,7 +31,7 @@ resource "aws_security_group" "db_security_group" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
-  tags = map("Name", "data-storage-rds-example-security-group")
+  tags = tomap({ "Name" : "data-storage-rds-example-security-group" })
 }
 
 module "example_datastore_rds" {
