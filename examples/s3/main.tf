@@ -7,7 +7,7 @@ module "example_s3_datastore" {
 
   enable_datastore = true
   create_s3_bucket = true
-  s3_bucket_name   = "s3-datastore"
+  s3_bucket_name   = "s3-datastore-1fdc28"
 }
 
 provider "aws" {
