@@ -67,15 +67,15 @@ Creates a dynamodb table and an access policy of which the ARN is returned as an
 | Name | Version |
 |------|---------|
 | terraform | >= 0.12.31 |
-| aws | >= 3.38.0 |
+| aws | >= 5.26.0 |
 | null | >=2.1 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| aws | >= 3.38.0 |
-| null | >=2.1 |
+| aws | 5.26.0 |
+| null | 3.2.2 |
 
 ## Inputs
 
@@ -85,7 +85,7 @@ Creates a dynamodb table and an access policy of which the ARN is returned as an
 | create_dynamodb_table | Whether or not to enable DynamoDB resources | `bool` | `false` | no |
 | create_rds_instance | Controls if an RDS instance should be provisioned. Will take precedence if this and `use_rds_snapshot` are both true. | `bool` | `false` | no |
 | create_s3_bucket | Controls if an S3 bucket should be provisioned | `bool` | `false` | no |
-| dynamodb_attributes | Additional DynamoDB attributes in the form of a list of mapped values | `list` | `[]` | no |
+| dynamodb_attributes | Additional DynamoDB attributes in the form of a list of mapped values | `list(any)` | `[]` | no |
 | dynamodb_autoscale_max_read_capacity | DynamoDB autoscaling max read capacity | `number` | `20` | no |
 | dynamodb_autoscale_max_write_capacity | DynamoDB autoscaling max write capacity | `number` | `20` | no |
 | dynamodb_autoscale_min_read_capacity | DynamoDB autoscaling min read capacity | `number` | `5` | no |
@@ -100,12 +100,12 @@ Creates a dynamodb table and an access policy of which the ARN is returned as an
 | dynamodb_global_secondary_index_map | Additional global secondary indexes in the form of a list of mapped values | `any` | `[]` | no |
 | dynamodb_hash_key | DynamoDB table Hash Key | `string` | `""` | no |
 | dynamodb_hash_key_type | Hash Key type, which must be a scalar type: `S`, `N`, or `B` for (S)tring, (N)umber or (B)inary data | `string` | `"S"` | no |
-| dynamodb_local_secondary_index_map | Additional local secondary indexes in the form of a list of mapped values | `list` | `[]` | no |
+| dynamodb_local_secondary_index_map | Additional local secondary indexes in the form of a list of mapped values | `list(any)` | `[]` | no |
 | dynamodb_range_key | DynamoDB table Range Key | `string` | `""` | no |
 | dynamodb_range_key_type | Range Key type, which must be a scalar type: `S`, `N` or `B` for (S)tring, (N)umber or (B)inary data | `string` | `"S"` | no |
 | dynamodb_stream_view_type | When an item in a table is modified, what information is written to the stream | `string` | `""` | no |
 | dynamodb_table_name | DynamoDB table name. Must be supplied if creating a dynamodb table | `string` | `""` | no |
-| dynamodb_tags | Additional tags (e.g map(`BusinessUnit`,`XYX`) | `map` | `{}` | no |
+| dynamodb_tags | Additional tags (e.g map(`BusinessUnit`,`XYX`) | `map(any)` | `{}` | no |
 | dynamodb_ttl_attribute | DynamoDB table ttl attribute | `string` | `"Expires"` | no |
 | dynamodb_ttl_enabled | Whether ttl is enabled or disabled | `bool` | `true` | no |
 | enable_datastore | Enables the data store module that will provision data storage resources | `bool` | `true` | no |
@@ -132,18 +132,18 @@ Creates a dynamodb table and an access policy of which the ARN is returned as an
 | rds_option_group_name | Name of the DB option group to associate | `string` | `null` | no |
 | rds_parameter_group_family | Name of the DB family (engine & version) for the parameter group. eg. postgres11 | `string` | `null` | no |
 | rds_parameter_group_name | Name of the DB parameter group to create and associate with the instance | `string` | `null` | no |
-| rds_parameter_group_parameters | Map of parameters that will be added to this database's parameter group. <br>  Parameters set here will override any AWS default parameters with the same name.<br>  Requires `rds_parameter_group_name` and `rds_parameter_group_family` to be set as well. <br>  Parameters should be provided as a key value pair within this map. eg `"param_name" : "param_value"`. <br>  Default is empty and the AWS default parameter group is used. | `map` | `{}` | no |
+| rds_parameter_group_parameters | Map of parameters that will be added to this database's parameter group. <br>  Parameters set here will override any AWS default parameters with the same name.<br>  Requires `rds_parameter_group_name` and `rds_parameter_group_family` to be set as well. <br>  Parameters should be provided as a key value pair within this map. eg `"param_name" : "param_value"`. <br>  Default is empty and the AWS default parameter group is used. | `map(any)` | `{}` | no |
 | rds_password | RDS database password for the user | `string` | `""` | no |
 | rds_security_group_ids | A List of security groups to bind to the rds instance | `list(string)` | `[]` | no |
 | rds_skip_final_snapshot | Determines whether a final DB snapshot is created before the DB instance is deleted. If true is specified, no DBSnapshot is created. If false is specified, a DB snapshot is created before the DB instance is deleted, using the value from final_snapshot_identifier | `bool` | `true` | no |
 | rds_storage_encryption_kms_key_arn | The ARN for the KMS encryption key. If creating an encrypted replica, set this to the destination KMS ARN. If storage_encrypted is set to true and kms_key_id is not specified the default KMS key created in your account will be used | `string` | `""` | no |
 | rds_subnet_group | Subnet group for RDS instances | `string` | `""` | no |
-| rds_tags | Additional tags for rds datastore resources | `map` | `{}` | no |
+| rds_tags | Additional tags for rds datastore resources | `map(any)` | `{}` | no |
 | rds_username | RDS database user name | `string` | `""` | no |
 | s3_bucket_name | The name of the bucket. It is recommended to add a namespace/suffix to the name to avoid naming collisions | `string` | `""` | no |
 | s3_enable_versioning | If versioning should be configured on the bucket | `bool` | `true` | no |
-| s3_tags | Additional tags to be added to the s3 resources | `map` | `{}` | no |
-| tags | Tags for all datastore resources | `map` | `{}` | no |
+| s3_tags | Additional tags to be added to the s3 resources | `map(any)` | `{}` | no |
+| tags | Tags for all datastore resources | `map(any)` | `{}` | no |
 | use_rds_snapshot | Controls if an RDS snapshot should be used when creating the rds instance. Will use the latest snapshot of the `rds_identifier` variable. | `bool` | `false` | no |
 
 ## Outputs
