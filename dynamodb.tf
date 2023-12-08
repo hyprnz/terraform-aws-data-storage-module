@@ -49,8 +49,8 @@ resource "aws_dynamodb_table" "this" {
   count            = local.count_dynamodb
   name             = var.dynamodb_table_name
   billing_mode     = var.dynamodb_billing_mode
-  read_capacity    = var.dynamodb_autoscale_min_read_capacity
-  write_capacity   = var.dynamodb_autoscale_min_write_capacity
+  read_capacity    = var.dynamodb_billing_mode == "PROVISIONED" ? var.dynamodb_autoscale_min_read_capacity: null
+  write_capacity   = var.dynamodb_billing_mode == "PROVISIONED" ? var.dynamodb_autoscale_min_write_capacity :null
   hash_key         = var.dynamodb_hash_key
   range_key        = var.dynamodb_range_key
   stream_enabled   = var.dynamodb_enable_streams
