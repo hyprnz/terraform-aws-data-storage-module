@@ -177,4 +177,5 @@ limitations under the License.
 ```
 
 Copyright &copy; 2020 [Hypr NZ](https://www.hypr.nz/)
+
 <!-- END_TF_DOCS -->
