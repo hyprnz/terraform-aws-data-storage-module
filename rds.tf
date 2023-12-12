@@ -25,7 +25,7 @@ resource "aws_db_instance" "this" {
   vpc_security_group_ids              = var.rds_security_group_ids
   allocated_storage                   = var.rds_allocated_storage
   max_allocated_storage               = var.rds_max_allocated_storage
-  backup_retention_period             = var.backup_retention_period
+  backup_retention_period             = var.rds_backup_retention_period
   iops                                = var.rds_iops
   multi_az                            = var.rds_multi_az
   monitoring_interval                 = var.rds_monitoring_interval
@@ -81,7 +81,7 @@ resource "aws_db_instance" "snapshot" {
   vpc_security_group_ids       = var.rds_security_group_ids
   allocated_storage            = var.rds_allocated_storage
   max_allocated_storage        = var.rds_max_allocated_storage
-  backup_retention_period      = var.backup_retention_period
+  backup_retention_period      = var.rds_backup_retention_period
   iops                         = var.rds_iops
   multi_az                     = var.rds_multi_az
   monitoring_interval          = var.rds_monitoring_interval

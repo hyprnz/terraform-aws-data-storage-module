@@ -1,17 +1,20 @@
 # Terraform Datastore Module
-The `terraform-datastorage-module` provides several datastorage options in a common abstraction. This is a shared module in that this module is designed to be sourced by other modules.
+The `terraform-aws-datastorage-module` provides several data storage options in a common abstraction. This is a shared module in that this module is designed to be sourced by other compute based modules.The key design intent for the datastore implementation is ownership and access. Access to and ownership of a datastore should be constrained to the compute service as per standard micro service design patterns. It should be highlighted that no roles are created from this module - compute execution roles are a compute service concern and as such should attach the specific datastore policies that are a concern of this module.
+
+As resources provisioned by this module are stateful, we recommend full Terraform plan review to ensure any changes made are intended. It's recommended to test module upgrades in downstream environments with disposable data and to review release notes for any breaking changes as a result of module or provider api changes.
+
+Branch 0.11 is compatible with Terraform 0.11 but is no longer supported or maintained. We will delete the branch shortly.
 
 
 
 ## TOC
 * [Release Notes](#release-notes)
-* [Tooling requirements](#tooling-requirements)
-* [Supported Implementations](#supported-implementations)
+* [Supported Configuration Options](#supported-configuration-options)
   * [No Datastore](#no-datastore)
   * [RDS (Postgres/MSSQL)](#rds)
   * [S3](#s3-bucket)
   * [Dynamodb](#dynamodb-table)
-* [Terraform Docs](#terraform-docs)
+* [Terraform Docs](#module-reference)
   * [Requirements](#Requirements)
   * [Providers](#Providers)
   * [Inputs](#inputs)
@@ -21,67 +24,44 @@ The `terraform-datastorage-module` provides several datastorage options in a com
 
 See the [Releases](https://github.com/hyprnz/terraform-aws-data-storage-module/releases) page for the complete list.
 
-* [__3.1.0__](https://github.com/hyprnz/terraform-aws-data-storage-module/releases/tag/3.0.1) - Adds support for more RDS parameters including IAM authentication, RDS Parameter Groups, and CloudWatch log exports.
-* [__3.0.0__](https://github.com/hyprnz/terraform-aws-data-storage-module/releases/tag/3.0.0) - Updates the module to support Terraform 0.13 (with backwards compatibility to 0.12.31). Adds support for more RDS parameters.
-* [__2.0.2__](https://github.com/hyprnz/terraform-aws-data-storage-module/releases/tag/2.0.2) - DynamoDB Policy Updates.
-* [__2.0.1__](https://github.com/hyprnz/terraform-aws-data-storage-module/releases/tag/2.0.1) - Dynamodb Policy Name Update.
-* [__2.0.0__](https://github.com/hyprnz/terraform-aws-data-storage-module/releases/tag/2.0.0) - Updated AWS Provider to Version 3.
+## Supported Configuration Options
 
-### Notes
-Branch 0.11 is compatible with Terraform 0.11 but is no longer supported or maintained. We will delete the branch shortly.
-
-## Tooling requirements
-This module supports Terraform `0.13.0` (with backwards compatibility for Terraform `0.12.31`)
-
-If you experience issues with this module as a result of aws provider v4.0.0 and above we recommend creating an override to cap the provider version. For example:
-
-```
-aws = {
-  source : "hashicorp/aws",
-  version : ">= 3.38.0, < 4.0.0"
-}
-```
-
-# Supported Implementations
-
-## No Datastore
+### No Datastore
 Provides the option to disable the module if required.
 
-## RDS
+### RDS
 RDS datastores supports Postgres and MySQL engines and provide many configuration options (see below). The module supports creating a new RDS instance `create_rds_instance` or an instance from an existing snapshot `use_rds_snapshot`.
 
 Although the module supports enabling IAM access to the RDS instance, the module intends that workloads will access the RDS instance via a username and password combination. The IAM access approach requires configuration within the RDS instance to map between the AWS and RDS engine abstractions, which the module does not support. The ability to enable IAM access support allows organisations to define user roles to access RDS instances rather than sharing or generating usernames and passwords.
 
-## S3 Bucket
-Creates an S3 bucket and an access policy of which the ARN is returned as an output variable. This allows the root/service module to compose other policies and expose these as an execution role.
+### S3 Bucket
+Creates an S3 bucket and an access policy of which the ARN is returned as an output variable. This allows the root/service module to compose other policies and expose these as an execution role. At this stage, the module does not support adding a custom resource policy, nor does it configure any explicit deny rules for the bucket, something that may change in the future.
 
-At this stage, the module does not support adding a custom resource policy, nor does it configure any explicit deny rules for the bucket.
+### DynamoDB Table
+Creates a DynamoDB table and an access policy of which the ARN is returned as an output variable. There are many configuration options (see below).
 
-## Dynamodb Table
-Creates a dynamodb table and an access policy of which the ARN is returned as an output variable. There are many configuration options (see below).
-
+## Module Reference
 ---
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
 
 | Name | Version |
 |------|---------|
-| terraform | >= 0.12.31 |
-| aws | >= 5.26.0 |
+| terraform | >= 1.3.0 |
+| aws | >= 5.26.0, <6.0.0 |
 | null | >=2.1 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| aws | 5.26.0 |
-| null | 3.2.2 |
+| aws | >= 5.26.0, <6.0.0 |
+| null | >=2.1 |
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| backup_retention_period | The backup retention period in days | `number` | `7` | no |
 | create_dynamodb_table | Whether or not to enable DynamoDB resources | `bool` | `false` | no |
 | create_rds_instance | Controls if an RDS instance should be provisioned. Will take precedence if this and `use_rds_snapshot` are both true. | `bool` | `false` | no |
 | create_s3_bucket | Controls if an S3 bucket should be provisioned | `bool` | `false` | no |
@@ -112,6 +92,7 @@ Creates a dynamodb table and an access policy of which the ARN is returned as an
 | rds_allocated_storage | Amount of storage allocated to RDS instance | `number` | `100` | no |
 | rds_apply_immediately | Specifies whether any database modifications are applied immediately, or during the next maintenance window. Defaults to `false`. | `bool` | `false` | no |
 | rds_auto_minor_version_upgrade | Indicates that minor engine upgrades will be applied automatically to the DB instance during the maintenance window. Defaults to `true`. | `bool` | `true` | no |
+| rds_backup_retention_period | The backup retention period in days | `number` | `7` | no |
 | rds_backup_window | The daily time range (in UTC) during which automated backups are created if they are enabled. Example: '09:46-10:16'. Must not overlap with maintenance_window | `string` | `"16:19-16:49"` | no |
 | rds_cloudwatch_logs_exports | Which RDS logs should be sent to CloudWatch. The default is empty (no logs sent to CloudWatch) | `set(string)` | `[]` | no |
 | rds_database_name | The name of the database. Can only contain alphanumeric characters | `string` | `""` | no |
@@ -132,7 +113,7 @@ Creates a dynamodb table and an access policy of which the ARN is returned as an
 | rds_option_group_name | Name of the DB option group to associate | `string` | `null` | no |
 | rds_parameter_group_family | Name of the DB family (engine & version) for the parameter group. eg. postgres11 | `string` | `null` | no |
 | rds_parameter_group_name | Name of the DB parameter group to create and associate with the instance | `string` | `null` | no |
-| rds_parameter_group_parameters | Map of parameters that will be added to this database's parameter group. <br>  Parameters set here will override any AWS default parameters with the same name.<br>  Requires `rds_parameter_group_name` and `rds_parameter_group_family` to be set as well. <br>  Parameters should be provided as a key value pair within this map. eg `"param_name" : "param_value"`. <br>  Default is empty and the AWS default parameter group is used. | `map(any)` | `{}` | no |
+| rds_parameter_group_parameters | Map of parameters that will be added to this database's parameter group.<br>  Parameters set here will override any AWS default parameters with the same name.<br>  Requires `rds_parameter_group_name` and `rds_parameter_group_family` to be set as well.<br>  Parameters should be provided as a key value pair within this map. eg `"param_name" : "param_value"`.<br>  Default is empty and the AWS default parameter group is used. | `map(any)` | `{}` | no |
 | rds_password | RDS database password for the user | `string` | `""` | no |
 | rds_security_group_ids | A List of security groups to bind to the rds instance | `list(string)` | `[]` | no |
 | rds_skip_final_snapshot | Determines whether a final DB snapshot is created before the DB instance is deleted. If true is specified, no DBSnapshot is created. If false is specified, a DB snapshot is created before the DB instance is deleted, using the value from final_snapshot_identifier | `bool` | `true` | no |
