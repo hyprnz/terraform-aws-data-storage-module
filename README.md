@@ -89,6 +89,7 @@ Creates a DynamoDB table and an access policy of which the ARN is returned as an
 | dynamodb_ttl_attribute | DynamoDB table ttl attribute | `string` | `"Expires"` | no |
 | dynamodb_ttl_enabled | Whether ttl is enabled or disabled | `bool` | `true` | no |
 | enable_datastore | Enables the data store module that will provision data storage resources | `bool` | `true` | no |
+| iam_resource_path | The path for IAM roles and policies | `string` | `"/"` | no |
 | rds_allocated_storage | Amount of storage allocated to RDS instance | `number` | `100` | no |
 | rds_apply_immediately | Specifies whether any database modifications are applied immediately, or during the next maintenance window. Defaults to `false`. | `bool` | `false` | no |
 | rds_auto_minor_version_upgrade | Indicates that minor engine upgrades will be applied automatically to the DB instance during the maintenance window. Defaults to `true`. | `bool` | `true` | no |
