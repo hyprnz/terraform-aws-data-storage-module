@@ -45,5 +45,6 @@ resource "aws_iam_policy" "dynamodb_table_datastore" {
 
   name        = "DataStorage-Dynamodb-${replace(var.dynamodb_table_name, "/\\.| /", "")}-Policy"
   policy      = data.aws_iam_policy_document.dynamodb_table_datastore[0].json
+  path        = var.iam_resource_path
   description = "Grants permissions to access the dynamodb table and associated objects"
 }

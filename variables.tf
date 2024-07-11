@@ -4,6 +4,12 @@ variable "enable_datastore" {
   default     = true
 }
 
+variable "iam_resource_path" {
+  type        = string
+  description = "The path for IAM roles and policies"
+  default     = "/"
+}
+
 variable "tags" {
   type        = map(any)
   description = "Tags for all datastore resources"

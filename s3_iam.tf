@@ -56,5 +56,6 @@ resource "aws_iam_policy" "s3_datastore_bucket" {
 
   name        = "S3DatstoreBucketObjectAccess-${replace(var.s3_bucket_name, "/\\.| /", "")}-Policy"
   policy      = data.aws_iam_policy_document.s3_datastore_bucket[0].json
+  path        = var.iam_resource_path
   description = "Grants permissions to access the datastore bucket and associated objects"
 }
