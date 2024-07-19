@@ -14,6 +14,7 @@ data "aws_iam_policy_document" "dynamodb_table_datastore" {
       "dynamodb:Scan",
       "dynamodb:BatchWriteItem",
       "dynamodb:PutItem",
+      "dynamodb:DeleteItem",
       "dynamodb:UpdateItem"
     ]
 
