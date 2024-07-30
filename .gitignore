@@ -26,3 +26,6 @@ out/
 
 # VScode
 .vscode/
+
+#direnv
+.envrc
