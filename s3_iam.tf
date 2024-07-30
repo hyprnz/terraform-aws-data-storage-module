@@ -59,3 +59,4 @@ resource "aws_iam_policy" "s3_datastore_bucket" {
   path        = var.iam_resource_path
   description = "Grants permissions to access the datastore bucket and associated objects"
 }
+
