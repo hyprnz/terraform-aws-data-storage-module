@@ -121,3 +121,9 @@ module "dynamodb_autoscaler" {
   autoscale_min_write_capacity = var.dynamodb_autoscale_min_write_capacity
   autoscale_max_write_capacity = var.dynamodb_autoscale_max_write_capacity
 }
+
+resource "aws_dynamodb_contributor_insights" "this" {
+  count = local.count_dynamodb_insights
+
+  table_name = aws_dynamodb_table.this[0].name
+}

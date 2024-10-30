@@ -19,6 +19,7 @@ module "example_dynamodb_base" {
   dynamodb_autoscale_min_write_capacity = 5
   dynamodb_autoscale_max_write_capacity = 20
   dynamodb_enable_autoscaler            = true
+  dynamodb_enable_insights              = true
 }
 
 provider "aws" {
