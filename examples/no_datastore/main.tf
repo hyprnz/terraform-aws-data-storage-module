@@ -5,7 +5,7 @@ module "example_no_datastore" {
     aws = aws
   }
 
-  enable_datastore = false
+  enable_datastore = var.enable_datastore
 }
 
 provider "aws" {
@@ -24,24 +24,24 @@ variable "region" {
   default = "ap-southeast-2"
 }
 
-
-output "endpoint" {
-  value = module.example_no_datastore.rds_instance_endpoint
+variable "enable_datastore" {
+  type = bool
 }
 
-output "instance_is" {
-  value = module.example_no_datastore.rds_instance_id
-}
 
 output "db_name" {
   value = module.example_no_datastore.rds_db_name
 }
 
-output "db_user" {
-  value = module.example_no_datastore.rds_db_user
+output "ddb_table_name" {
+  value = module.example_no_datastore.dynamodb_table_name
 }
 
-output "db_url" {
-  value = module.example_no_datastore.rds_db_url
+output "s3_bucket_name" {
+  value = module.example_no_datastore.s3_bucket_name
 }
+
+
+
+
 
