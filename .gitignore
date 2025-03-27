@@ -1,5 +1,6 @@
 # Terraform
 .terraform
+.terraform.lock.hcl
 **/.terraform/*
 *.tfstate
 *.tfstate.backup
@@ -29,3 +30,5 @@ out/
 
 #direnv
 .envrc
+
+mise/*
