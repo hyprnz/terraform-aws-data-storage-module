@@ -45,3 +45,11 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "this" {
     }
   }
 }
+
+resource "aws_s3_bucket_notification" "this" {
+  count = local.count_s3_notifications
+
+  bucket = aws_s3_bucket.this[0].id
+
+  eventbridge = var.send_bucket_notifications_to_eventbridge
+}

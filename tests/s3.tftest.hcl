@@ -30,6 +30,11 @@ run "test_locals" {
     condition     = local.create_s3 == (var.enable_datastore && var.create_s3_bucket)
     error_message = "local.create_s3 should be the logical AND of enable_datastore and create_s3_bucket."
   }
+
+  assert {
+    condition     = local.count_s3_notifications == 0
+    error_message = "local.count_s3_notifications should be 0 when send_bucket_notifications_to_eventbridge is false."
+  }
 }
 
 run "s3_bucket_creation" {
@@ -146,4 +151,21 @@ run "s3_bucket_region" {
     condition     = aws_s3_bucket.this[0].region == "us-west-2"
     error_message = "S3 bucket region should match provider region."
   }
+}
+
+run "s3_send_notifications_to_eventbridge" {
+  variables {
+    send_bucket_notifications_to_eventbridge = true
+  }
+
+  assert {
+    condition     = local.count_s3_notifications == 1
+    error_message = "local.count_s3_notifications should be 1 when send_bucket_notifications_to_eventbridge is true."
+  }
+
+  assert {
+    condition     = aws_s3_bucket_notification.this[0].eventbridge == true
+       error_message = "S3 bucket notifications should be sent to EventBridge."
+  }
+
 }
