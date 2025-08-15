@@ -51,5 +51,5 @@ resource "aws_s3_bucket_notification" "this" {
 
   bucket = aws_s3_bucket.this[0].id
 
-  eventbridge = var.send_bucket_notifications_to_eventbridge
+  eventbridge = var.s3_send_bucket_notifications_to_eventbridge
 }

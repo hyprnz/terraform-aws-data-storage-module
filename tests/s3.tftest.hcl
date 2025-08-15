@@ -155,7 +155,7 @@ run "s3_bucket_region" {
 
 run "s3_send_notifications_to_eventbridge" {
   variables {
-    send_bucket_notifications_to_eventbridge = true
+    s3_send_bucket_notifications_to_eventbridge = true
   }
 
   assert {
