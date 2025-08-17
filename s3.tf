@@ -53,3 +53,20 @@ resource "aws_s3_bucket_notification" "this" {
 
   eventbridge = var.s3_send_bucket_notifications_to_eventbridge
 }
+
+resource "aws_s3_bucket_cors_configuration" "this" {
+  count = local.count_s3_cors_configuration
+
+  bucket = aws_s3_bucket.this[0].id
+
+  dynamic "cors_rule" {
+    for_each = var.s3_cors_config
+    content {
+      allowed_headers = cors_rule.value.allowed_headers
+      allowed_methods = cors_rule.value.allowed_methods
+      allowed_origins = cors_rule.value.allowed_origins
+      expose_headers  = cors_rule.value.expose_headers
+      max_age_seconds = cors_rule.value.max_age_seconds
+    }
+  }
+}

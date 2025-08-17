@@ -2,6 +2,7 @@ locals {
   create_s3 = var.enable_datastore && var.create_s3_bucket
   count_s3  = local.create_s3 ? 1 : 0
   count_s3_notifications = local.create_s3 && var.s3_send_bucket_notifications_to_eventbridge ? 1 : 0
+  count_s3_cors_configuration = local.create_s3 && length(var.s3_cors_config) > 0 ? 1 : 0
 
   create_dynamodb          = var.enable_datastore && var.create_dynamodb_table
   create_dynamodb_insights = var.enable_datastore && var.create_dynamodb_table && var.dynamodb_enable_insights

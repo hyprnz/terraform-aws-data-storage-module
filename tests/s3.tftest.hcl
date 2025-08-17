@@ -35,6 +35,11 @@ run "test_locals" {
     condition     = local.count_s3_notifications == 0
     error_message = "local.count_s3_notifications should be 0 when send_bucket_notifications_to_eventbridge is false."
   }
+
+  assert {
+    condition     = local.count_s3_cors_configuration == 0
+    error_message = "local.count_s3_cors_configuration should be 0 when s3_cors_config is empty."
+  }
 }
 
 run "s3_bucket_creation" {
@@ -168,4 +173,35 @@ run "s3_send_notifications_to_eventbridge" {
        error_message = "S3 bucket notifications should be sent to EventBridge."
   }
 
+}
+
+run "s3_cors_config" {
+  variables {
+    s3_cors_config = [{
+      allowed_headers = ["*"]
+      allowed_methods = ["GET", "POST"]
+      allowed_origins = ["*"]
+      expose_headers  = ["ETag"]
+      max_age_seconds = 3000
+    }]
+  }
+
+  assert {
+    condition     = length(aws_s3_bucket_cors_configuration.this[0].cors_rule) > 0
+    error_message = "S3 bucket CORS configuration was not configured."
+  }
+}
+
+run "s3_cors_config_partial" {
+  variables {
+    s3_cors_config = [{
+      allowed_methods = ["GET"]
+      allowed_origins = ["*"]
+    }]
+  }
+
+  assert {
+    condition     = length(aws_s3_bucket_cors_configuration.this[0].cors_rule) > 0
+    error_message = "S3 bucket CORS configuration partial was not configured."
+  }
 }
