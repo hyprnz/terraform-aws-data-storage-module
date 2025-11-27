@@ -58,7 +58,7 @@ run "rds_locals_default_username" {
   command = plan
   variables {
     rds_database_name = "testdb"
-    rds_username = ""
+    rds_username      = ""
   }
 
   assert {
@@ -181,7 +181,7 @@ run "rds_instance_deletion_protection" {
 run "rds_instance_iam_auth" {
   variables {
     rds_iam_authentication_enabled = true
-    rds_identifier = "test-rds-instance-iam"
+    rds_identifier                 = "test-rds-instance-iam"
   }
 
   command = plan

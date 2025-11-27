@@ -170,7 +170,7 @@ run "s3_send_notifications_to_eventbridge" {
 
   assert {
     condition     = aws_s3_bucket_notification.this[0].eventbridge == true
-       error_message = "S3 bucket notifications should be sent to EventBridge."
+    error_message = "S3 bucket notifications should be sent to EventBridge."
   }
 
 }

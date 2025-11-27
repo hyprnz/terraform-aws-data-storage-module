@@ -22,8 +22,8 @@ provider "aws" {
 
   default_tags {
     tags = {
-      "Environment"    = "env",
-      "Managed By"     = "IaC"
+      "Environment" = "env",
+      "Managed By"  = "IaC"
     }
   }
 }

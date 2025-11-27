@@ -237,9 +237,9 @@ run "dynamodb_autoscaling" {
 
 run "dynamodb_streams_disabled" {
   variables {
-    enable_datastore      = true
-    create_dynamodb_table = true
-    dynamodb_enable_streams = false
+    enable_datastore          = true
+    create_dynamodb_table     = true
+    dynamodb_enable_streams   = false
     dynamodb_stream_view_type = null
   }
 
