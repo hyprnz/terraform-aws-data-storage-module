@@ -3,22 +3,22 @@ The `terraform-aws-datastorage-module` provides several data storage options in 
 
 As resources provisioned by this module are stateful, we recommend full Terraform plan review to ensure any changes made are intended. It's recommended to test module upgrades in downstream environments with disposable data and to review release notes for any breaking changes as a result of module or provider api changes.
 
-Branch 0.11 is compatible with Terraform 0.11 but is no longer supported or maintained. We will delete the branch shortly.
-
-
 
 ## TOC
-* [Release Notes](#release-notes)
-* [Supported Configuration Options](#supported-configuration-options)
-  * [No Datastore](#no-datastore)
-  * [RDS (Postgres/MSSQL)](#rds)
-  * [S3](#s3-bucket)
-  * [Dynamodb](#dynamodb-table)
-* [Terraform Docs](#module-reference)
-  * [Requirements](#Requirements)
-  * [Providers](#Providers)
-  * [Inputs](#inputs)
-  * [Outputs](#outputs)
+- [Terraform Datastore Module](#terraform-datastore-module)
+  - [TOC](#toc)
+  - [Release notes](#release-notes)
+  - [Supported Configuration Options](#supported-configuration-options)
+    - [No Datastore](#no-datastore)
+    - [RDS](#rds)
+    - [S3 Bucket](#s3-bucket)
+    - [DynamoDB Table](#dynamodb-table)
+  - [Module Reference](#module-reference)
+  - [Requirements](#requirements)
+  - [Providers](#providers)
+  - [Inputs](#inputs)
+  - [Outputs](#outputs)
+  - [License](#license)
 
 ## Release notes
 
@@ -48,15 +48,15 @@ Creates a DynamoDB table and an access policy of which the ARN is returned as an
 | Name | Version |
 |------|---------|
 | terraform | >= 1.3.0 |
-| aws | >= 5.26.0, <6.0.0 |
+| aws | >= 6.0.0, <7.0.0 |
 | null | >=2.1 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| aws | >= 5.26.0, <6.0.0 |
-| null | >=2.1 |
+| aws | 5.100.0 |
+| null | 3.2.4 |
 
 ## Inputs
 
@@ -75,6 +75,7 @@ Creates a DynamoDB table and an access policy of which the ARN is returned as an
 | dynamodb_billing_mode | DynamoDB Billing mode. Can be PROVISIONED or PAY_PER_REQUEST | `string` | `"PROVISIONED"` | no |
 | dynamodb_enable_autoscaler | Whether or not to enable DynamoDB autoscaling | `bool` | `false` | no |
 | dynamodb_enable_encryption | Enable DynamoDB server-side encryption | `bool` | `true` | no |
+| dynamodb_enable_insights | Enables Contributor Insights for Dynamodb | `bool` | `false` | no |
 | dynamodb_enable_point_in_time_recovery | Enable DynamoDB point in time recovery | `bool` | `true` | no |
 | dynamodb_enable_streams | Enable DynamoDB streams | `bool` | `false` | no |
 | dynamodb_global_secondary_index_map | Additional global secondary indexes in the form of a list of mapped values | `any` | `[]` | no |
@@ -123,7 +124,9 @@ Creates a DynamoDB table and an access policy of which the ARN is returned as an
 | rds_tags | Additional tags for rds datastore resources | `map(any)` | `{}` | no |
 | rds_username | RDS database user name | `string` | `""` | no |
 | s3_bucket_name | The name of the bucket. It is recommended to add a namespace/suffix to the name to avoid naming collisions | `string` | `""` | no |
+| s3_cors_config | CORS configuration for the bucket | <pre>list(object({<br>    allowed_headers = optional(list(string), null)<br>    allowed_methods = optional(list(string), null)<br>    allowed_origins = optional(list(string), null)<br>    expose_headers  = optional(list(string), null)<br>    max_age_seconds = optional(number, null)<br>  }))</pre> | `[]` | no |
 | s3_enable_versioning | If versioning should be configured on the bucket | `bool` | `true` | no |
+| s3_send_bucket_notifications_to_eventbridge | Enable bucket notifications and emit to EventBridge | `bool` | `false` | no |
 | s3_tags | Additional tags to be added to the s3 resources | `map(any)` | `{}` | no |
 | tags | Tags for all datastore resources | `map(any)` | `{}` | no |
 | use_rds_snapshot | Controls if an RDS snapshot should be used when creating the rds instance. Will use the latest snapshot of the `rds_identifier` variable. | `bool` | `false` | no |
@@ -178,5 +181,4 @@ limitations under the License.
 ```
 
 Copyright &copy; 2020 [Hypr NZ](https://www.hypr.nz/)
-
 <!-- END_TF_DOCS -->

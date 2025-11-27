@@ -25,7 +25,8 @@ variable "region" {
 }
 
 variable "enable_datastore" {
-  type = bool
+  type    = bool
+  default = false
 }
 
 

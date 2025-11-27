@@ -5,7 +5,7 @@ provider "aws" {
 variables {
   enable_datastore = true
   create_s3_bucket = true
-  s3_bucket_name   = "my-datastore-example-bucket"
+  s3_bucket_name   = "my-datastore-example-bucket-10854"
   tags = {
     Environment = "test"
     ManagedBy   = "Terraform"
